@@ -1,137 +1,136 @@
-/* Hero Section */
 .hero {
-  position: relative;
-  width: 100%;
-  height: 100vh;
+  min-height: 100vh;
+  background: linear-gradient(135deg, #0f172a, #0b1120);
   display: flex;
   align-items: center;
   justify-content: center;
-  color: #fff;
-  overflow: hidden;
-  text-align: center;
-  padding: 0 10%;
-  background: #0d1117; /* fallback color */
+  color: white;
+  padding: 40px 20px;
 }
 
-.hero-bg {
-  position: absolute;
-  top: 0;
-  left: 0;
+.hero-container {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  max-width: 1200px;
   width: 100%;
-  height: 100%;
-  background: url('../assets/R1.png') no-repeat center center/cover;
-  opacity: 0.15;
-  z-index: 1;
+  gap: 50px;
 }
 
-/* Hero Content */
-.hero-content {
-  position: relative;
-  z-index: 2;
-  max-width: 900px;
+/* LEFT SIDE */
+.hero-left {
+  flex: 1;
 }
 
-.hero h1 {
+.hero-left h1 {
   font-size: 3rem;
   margin-bottom: 10px;
-  font-weight: 700;
 }
 
-.hero h1 span {
-  color: #00e5ff;
+.hero-left h1 span {
+  background: linear-gradient(90deg, #3b82f6, #06b6d4);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
 }
 
-.hero h2 {
-  font-size: 1.8rem;
-  color: #9ca3af;
+.hero-left h2 {
+  font-size: 1.5rem;
   margin-bottom: 20px;
+  color: #94a3b8;
+  min-height: 40px;
 }
 
-.hero p {
-  font-size: 1.1rem;
-  margin-bottom: 25px;
+.cursor {
+  animation: blink 1s infinite;
+}
+
+@keyframes blink {
+  50% { opacity: 0; }
+}
+
+.hero-left p {
   color: #cbd5e1;
   line-height: 1.6;
-}
-
-/* Skills in Hero */
-.hero-skills {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: center;
-  gap: 15px;
   margin-bottom: 30px;
+  max-width: 500px;
 }
 
-.hero-skills span {
-  background: rgba(0, 229, 255, 0.1);
-  padding: 8px 15px;
-  border-radius: 12px;
-  font-size: 0.9rem;
-  color: #00e5ff;
-  transition: transform 0.3s ease, box-shadow 0.3s ease;
-}
-
-.hero-skills span:hover {
-  transform: translateY(-5px);
-  box-shadow: 0 10px 25px rgba(0, 229, 255, 0.3);
-}
-
-/* Buttons */
+/* BUTTONS */
 .hero-buttons {
   display: flex;
-  justify-content: center;
-  flex-wrap: wrap;
   gap: 15px;
 }
 
-.hero-buttons .btn {
-  padding: 12px 25px;
-  border-radius: 50px;
-  font-weight: 600;
-  cursor: pointer;
-  transition: all 0.3s ease;
+.btn {
+  padding: 10px 25px;
+  border-radius: 30px;
+  font-weight: 500;
   text-decoration: none;
+  transition: 0.3s ease;
 }
 
-.btn.primary {
-  background: #00e5ff;
-  color: #0d1117;
+.primary {
+  background: linear-gradient(90deg, #3b82f6, #06b6d4);
+  color: white;
 }
 
-.btn.primary:hover {
-  background: #00bcd4;
+.primary:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 10px 25px rgba(59, 130, 246, 0.5);
 }
 
-.btn.outline {
-  border: 2px solid #00e5ff;
-  color: #00e5ff;
+.outline {
+  border: 1px solid #3b82f6;
+  color: #3b82f6;
 }
 
-.btn.outline:hover {
-  background: rgba(0, 229, 255, 0.1);
+.outline:hover {
+  background: #3b82f6;
+  color: white;
 }
 
-.btn.ghost {
-  border: 2px solid #fff;
-  color: #fff;
+/* RIGHT SIDE IMAGE */
+.hero-right {
+  flex: 1;
+  display: flex;
+  justify-content: center;
 }
 
-.btn.ghost:hover {
-  background: rgba(255, 255, 255, 0.1);
+.image-wrapper {
+  position: relative;
+  width: 320px;
+  height: 380px;
+  border-radius: 20px;
+  overflow: hidden;
+  animation: float 4s ease-in-out infinite;
+  box-shadow: 0 20px 50px rgba(0, 0, 0, 0.6);
 }
 
-/* Responsive */
-@media screen and (max-width: 900px) {
-  .hero h1 {
-    font-size: 2.2rem;
+.image-wrapper img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+/* Floating animation */
+@keyframes float {
+  0% { transform: translateY(0px); }
+  50% { transform: translateY(-15px); }
+  100% { transform: translateY(0px); }
+}
+
+/* MOBILE */
+@media (max-width: 900px) {
+  .hero-container {
+    flex-direction: column;
+    text-align: center;
   }
 
-  .hero h2 {
-    font-size: 1.4rem;
+  .hero-left p {
+    max-width: 100%;
   }
 
-  .hero p {
-    font-size: 1rem;
+  .hero-buttons {
+    justify-content: center;
   }
 }

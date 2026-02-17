@@ -1,27 +1,27 @@
 import { useEffect, useState } from "react";
 import "../css/About.css";
-import { FaReact, FaCode, FaLaptopCode } from "react-icons/fa";
-import ProfilePhoto from "../assets/ream.png"; // <- add your photo in assets folder
+import { FaReact, FaCode, FaLaptopCode, FaGraduationCap } from "react-icons/fa";
+import ProfilePhoto from "../assets/ream.png";
 
 function About() {
-  // Stats counters
   const [years, setYears] = useState(0);
   const [projects, setProjects] = useState(0);
   const [passion, setPassion] = useState(0);
 
   useEffect(() => {
     let y = 0, p = 0, pa = 0;
+
     const interval = setInterval(() => {
       if (y < 2) y++;
-      if (p < 10) p++;
-      if (pa < 100) pa += 5;
+      if (p < 15) p++;
+      if (pa < 100) pa += 4;
 
       setYears(y);
       setProjects(p);
       setPassion(pa);
 
-      if (y === 2 && p === 10 && pa >= 100) clearInterval(interval);
-    }, 80);
+      if (y === 2 && p === 15 && pa >= 100) clearInterval(interval);
+    }, 60);
 
     return () => clearInterval(interval);
   }, []);
@@ -30,63 +30,82 @@ function About() {
     <section className="about-section" id="about">
       <div className="about-container">
 
-        {/* LEFT: Text + Stats */}
+        {/* LEFT SIDE */}
         <div className="about-left">
-          <h2>About Me</h2>
-          <h3>Frontend Developer & UI/UX Enthusiast</h3>
+          <span className="section-tag">ABOUT ME</span>
+          <h2>Building Modern & Scalable Web Applications</h2>
 
-          <p>
-            I’m <span>Ream</span>, a passionate frontend developer who enjoys
-            building modern, responsive, and user-friendly web applications.
-            I focus on <strong>clean design</strong>, performance, and great UX.
-          </p>
-
-          <p>
-            I work mainly with <strong>React, JavaScript, HTML, CSS</strong>.  
-            I also have experience in <strong>PHP, databases, Figma, Docker, AWS</strong>.  
-            Soft skills: <strong>teamwork, problem-solving, time management</strong>.
+          <p className="about-description">
+            I'm <strong>Ream</strong>, a passionate Frontend Developer focused on
+            creating high-performance and user-friendly web applications.
+            I care deeply about clean code, UI precision, and delivering
+            seamless digital experiences.
           </p>
 
           {/* Stats */}
           <div className="about-stats">
-            <div className="stat-card">
-              <h4>{years}+</h4>
+            <div className="stat">
+              <h3>{years}+</h3>
               <p>Years Learning</p>
             </div>
-            <div className="stat-card">
-              <h4>{projects}+</h4>
-              <p>Projects</p>
+            <div className="stat">
+              <h3>{projects}+</h3>
+              <p>Projects Completed</p>
             </div>
-            <div className="stat-card">
-              <h4>{passion}%</h4>
-              <p>Passion</p>
+            <div className="stat">
+              <h3>{passion}%</h3>
+              <p>Dedication</p>
+            </div>
+          </div>
+
+          {/* Education */}
+          <div className="education">
+            <h3><FaGraduationCap /> Education</h3>
+
+            <div className="education-card">
+              <h4>Passerelles Numériques Cambodia (PNC)</h4>
+              <span className="edu-year">2022 - Present</span>
+
+              <p>
+                Currently pursuing professional IT training specializing in 
+                Web Development. The program emphasizes technical excellence, 
+                real-world project experience, teamwork, and professional growth.
+              </p>
+
+              <ul>
+                <li>✔ Frontend Development (React, JavaScript, HTML, CSS)</li>
+                <li>✔ Backend Fundamentals & Databases</li>
+                <li>✔ UI/UX Design & Figma</li>
+                <li>✔ Agile & Scrum Team Collaboration</li>
+                <li>✔ DevOps & Deployment Basics</li>
+              </ul>
             </div>
           </div>
         </div>
 
-        {/* RIGHT: Photo + Cards */}
+        {/* RIGHT SIDE */}
         <div className="about-right">
-          <div className="profile-photo">
+          <div className="profile-card">
             <img src={ProfilePhoto} alt="Ream Profile" />
           </div>
 
-          <div className="about-cards">
-            <div className="card">
-              <FaCode />
+          <div className="skills-cards">
+            <div className="skill-card">
+              <FaCode className="icon" />
               <h4>Clean Code</h4>
-              <p>Readable, maintainable, scalable code.</p>
+              <p>Readable, maintainable, and scalable architecture.</p>
             </div>
 
-            <div className="card">
-              <FaReact />
+            <div className="skill-card">
+              <FaReact className="icon" />
               <h4>React Development</h4>
               <p>Modern SPAs with reusable components.</p>
             </div>
 
-            <div className="card">
-              <FaLaptopCode />
+            <div className="skill-card">
+              <FaLaptopCode className="icon" />
               <h4>Responsive Design</h4>
-              <p>Works perfectly on all devices.</p>
+              <p>Pixel-perfect across desktop, tablet, and mobile.</p>
             </div>
           </div>
         </div>
