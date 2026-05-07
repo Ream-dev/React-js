@@ -1,6 +1,6 @@
 import { useState } from "react";
 import "../css/Contact.css";
-import { FaEnvelope, FaPhone, FaLinkedin, FaGithub, FaCheckCircle } from "react-icons/fa";
+import { FaEnvelope, FaPhone, FaLinkedin, FaGithub, FaCheckCircle, FaJsSquare, FaHtml5, FaCss3Alt, FaPython, FaWordpress, FaGitAlt, FaDatabase, FaNodeJs, FaAws } from "react-icons/fa";
 
 function Contact() {
   const [formData, setFormData] = useState({
@@ -45,6 +45,127 @@ function Contact() {
       <p className="section">
         Feel free to reach out to me for projects, collaborations, or questions.
       </p>
+
+      {/* Skills Section */}
+      <div className="skills-section">
+        <h3 className="skills-title">Technical Skills & Technologies</h3>
+        <div className="skills-grid">
+          <div className="skill-item">
+            <div className="skill-icon-wrapper">
+              <FaJsSquare className="skill-icon vue" />
+            </div>
+            <span className="skill-name">Vue.js</span>
+          </div>
+          <div className="skill-item">
+            <div className="skill-icon-wrapper">
+              <FaJsSquare className="skill-icon typescript" />
+            </div>
+            <span className="skill-name">TypeScript</span>
+          </div>
+          <div className="skill-item">
+            <div className="skill-icon-wrapper">
+              <FaJsSquare className="skill-icon php" />
+            </div>
+            <span className="skill-name">PHP</span>
+          </div>
+          <div className="skill-item">
+            <div className="skill-icon-wrapper">
+              <FaNodeJs className="skill-icon nodejs" />
+            </div>
+            <span className="skill-name">Node.js</span>
+          </div>
+          <div className="skill-item">
+            <div className="skill-icon-wrapper">
+              <FaDatabase className="skill-icon database" />
+            </div>
+            <span className="skill-name">MongoDB</span>
+          </div>
+          <div className="skill-item">
+            <div className="skill-icon-wrapper">
+              <FaDatabase className="skill-icon sql" />
+            </div>
+            <span className="skill-name">SQL</span>
+          </div>
+          <div className="skill-item">
+            <div className="skill-icon-wrapper">
+              <FaAws className="skill-icon aws" />
+            </div>
+            <span className="skill-name">AWS</span>
+          </div>
+          <div className="skill-item">
+            <div className="skill-icon-wrapper">
+              <FaJsSquare className="skill-icon javascript" />
+            </div>
+            <span className="skill-name">JavaScript</span>
+          </div>
+          <div className="skill-item">
+            <div className="skill-icon-wrapper">
+              <FaHtml5 className="skill-icon html" />
+            </div>
+            <span className="skill-name">HTML</span>
+          </div>
+          <div className="skill-item">
+            <div className="skill-icon-wrapper">
+              <FaCss3Alt className="skill-icon css" />
+            </div>
+            <span className="skill-name">CSS</span>
+          </div>
+          <div className="skill-item">
+            <div className="skill-icon-wrapper">
+              <FaPython className="skill-icon python" />
+            </div>
+            <span className="skill-name">Python</span>
+          </div>
+          <div className="skill-item">
+            <div className="skill-icon-wrapper">
+              <FaJsSquare className="skill-icon laravel" />
+            </div>
+            <span className="skill-name">Laravel</span>
+          </div>
+          <div className="skill-item">
+            <div className="skill-icon-wrapper">
+              <FaWordpress className="skill-icon wordpress" />
+            </div>
+            <span className="skill-name">WordPress</span>
+          </div>
+          <div className="skill-item">
+            <div className="skill-icon-wrapper">
+              <FaJsSquare className="skill-icon figma" />
+            </div>
+            <span className="skill-name">Figma</span>
+          </div>
+          <div className="skill-item">
+            <div className="skill-icon-wrapper">
+              <FaJsSquare className="skill-icon vercel" />
+            </div>
+            <span className="skill-name">Vercel</span>
+          </div>
+          <div className="skill-item">
+            <div className="skill-icon-wrapper">
+              <FaDatabase className="skill-icon data" />
+            </div>
+            <span className="skill-name">Data Analysis</span>
+          </div>
+          <div className="skill-item">
+            <div className="skill-icon-wrapper">
+              <FaGithub className="skill-icon github" />
+            </div>
+            <span className="skill-name">GitHub</span>
+          </div>
+          <div className="skill-item">
+            <div className="skill-icon-wrapper">
+              <FaGitAlt className="skill-icon git" />
+            </div>
+            <span className="skill-name">Git</span>
+          </div>
+          <div className="skill-item">
+            <div className="skill-icon-wrapper">
+              <FaDatabase className="skill-icon laragon" />
+            </div>
+            <span className="skill-name">Laragon</span>
+          </div>
+        </div>
+      </div>
 
       <div className="contact-container">
         {/* Contact Info */}
