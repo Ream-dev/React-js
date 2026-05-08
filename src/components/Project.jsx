@@ -25,12 +25,12 @@ function Projects() {
 
   const projects = [
     {
-      title: "HealthConnect Portal",
+      title: "bussiness system for selling product",
       year: "2025",
-      desc: "Full-stack patient system with authentication, CRUD, and appointment scheduling.",
-      tech: ["React", "PHP", "MySQL", "REST API"],
+      desc: "Full-stack product selling system with user authentication and admin dashboard statistics.",
+      tech: ["React", "typescript", "github", "Tailwind CSS"],
       repository: "https://github.com/reamkhorn12345-art/potiofilo-ream-html.git",
-      liveDemo: "https://my-portfolios-html.vercel.app",
+      liveDemo: "https://bussiness-85po.vercel.app/ ",
     },
     {
       title: "weather app",
