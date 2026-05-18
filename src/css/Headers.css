@@ -1,6 +1,7 @@
 .hero {
   min-height: 100vh;
-  background: linear-gradient(135deg, #0f172a, #0b1120);
+  background: radial-gradient(circle at top center, rgba(59, 130, 246, 0.16), transparent 28%),
+              linear-gradient(155deg, #020817 0%, #0b1020 40%, #0f172a 100%);
   display: flex;
   align-items: center;
   justify-content: center;
@@ -10,15 +11,28 @@
   overflow: hidden;
 }
 
-/* Subtle animated grid background */
 .hero::before {
   content: "";
   position: absolute;
   inset: 0;
   background-image:
-    linear-gradient(rgba(59, 130, 246, 0.03) 1px, transparent 1px),
-    linear-gradient(90deg, rgba(59, 130, 246, 0.03) 1px, transparent 1px);
-  background-size: 60px 60px;
+    radial-gradient(circle at 20% 10%, rgba(96, 165, 250, 0.18), transparent 28%),
+    radial-gradient(circle at 85% 18%, rgba(56, 189, 248, 0.14), transparent 22%),
+    linear-gradient(rgba(255, 255, 255, 0.04), rgba(255, 255, 255, 0.04));
+  pointer-events: none;
+  z-index: 1;
+}
+
+.hero::after {
+  content: "";
+  position: absolute;
+  bottom: 10%;
+  right: 5%;
+  width: 420px;
+  height: 420px;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(59, 130, 246, 0.16), transparent 55%);
+  filter: blur(36px);
   pointer-events: none;
   z-index: 1;
 }
@@ -60,7 +74,7 @@
   display: flex;
   align-items: center;
   justify-content: space-between;
-  max-width: 1200px;
+  max-width: 1280px;
   width: 100%;
   gap: 80px;
   position: relative;
@@ -70,6 +84,7 @@
 /* LEFT SIDE */
 .hero-left {
   flex: 1;
+  max-width: 620px;
 }
 
 /* Greeting badge */
@@ -105,25 +120,25 @@
 }
 
 .hero-left h1 {
-  font-size: 4rem;
-  font-weight: 800;
-  margin-bottom: 12px;
-  line-height: 1.1;
-  letter-spacing: -0.02em;
+  font-size: clamp(3.8rem, 5vw, 5.4rem);
+  font-weight: 900;
+  margin-bottom: 16px;
+  line-height: 1.02;
+  letter-spacing: -0.04em;
 }
 
 .hero-left h1 span {
-  background: linear-gradient(90deg, #3b82f6, #06b6d4);
+  background: linear-gradient(90deg, #38bdf8, #7c3aed);
   -webkit-background-clip: text;
   background-clip: text;
   -webkit-text-fill-color: transparent;
 }
 
 .hero-left h2 {
-  font-size: 1.6rem;
-  margin-bottom: 24px;
-  color: #94a3b8;
-  min-height: 40px;
+  font-size: 1.7rem;
+  margin-bottom: 28px;
+  color: #cbd5e1;
+  min-height: 48px;
   font-weight: 500;
 }
 
@@ -142,10 +157,10 @@
 }
 
 .hero-left p {
-  color: #94a3b8;
-  line-height: 1.7;
-  margin-bottom: 28px;
-  max-width: 520px;
+  color: #cbd5e1;
+  line-height: 1.8;
+  margin-bottom: 32px;
+  max-width: 580px;
   font-size: 1.05rem;
 }
 
@@ -197,15 +212,15 @@
 }
 
 .btn {
-  padding: 12px 28px;
-  border-radius: 12px;
-  font-weight: 600;
-  font-size: 0.95rem;
+  padding: 14px 30px;
+  border-radius: 14px;
+  font-weight: 700;
+  font-size: 0.98rem;
   text-decoration: none;
-  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  transition: transform 0.25s ease, box-shadow 0.25s ease, background 0.25s ease;
   display: inline-flex;
   align-items: center;
-  gap: 8px;
+  gap: 10px;
   position: relative;
   overflow: hidden;
 }
@@ -217,14 +232,15 @@
 }
 
 .primary:hover {
-  transform: translateY(-2px);
-  box-shadow: 0 8px 25px rgba(59, 130, 246, 0.5);
+  transform: translateY(-3px);
+  box-shadow: 0 12px 34px rgba(59, 130, 246, 0.45);
 }
 
 .outline {
-  border: 1.5px solid rgba(59, 130, 246, 0.4);
-  color: #60a5fa;
-  background: rgba(59, 130, 246, 0.05);
+  border: 1.5px solid rgba(59, 130, 246, 0.35);
+  color: #93c5fd;
+  background: rgba(255, 255, 255, 0.05);
+  backdrop-filter: blur(8px);
 }
 
 .outline:hover {
@@ -262,15 +278,15 @@
 
 /* RIGHT SIDE PROFILE CARD */
 .profile-card {
-  background: rgba(255, 255, 255, 0.03);
-  border: 1px solid rgba(255, 255, 255, 0.08);
-  border-radius: 24px;
-  padding: 40px;
-  max-width: 520px;
+  background: rgba(15, 23, 42, 0.92);
+  border: 1px solid rgba(96, 165, 250, 0.16);
+  border-radius: 30px;
+  padding: 44px 36px 36px;
+  max-width: 560px;
   width: 100%;
   text-align: center;
-  backdrop-filter: blur(12px);
-  box-shadow: 0 20px 50px rgba(0, 0, 0, 0.4);
+  backdrop-filter: blur(18px);
+  box-shadow: 0 34px 80px rgba(0, 0, 0, 0.35);
   animation: float 5s ease-in-out infinite;
   position: relative;
   overflow: hidden;
@@ -295,9 +311,9 @@
 
 .profile-image-wrapper {
   position: relative;
-  width: 220px;
-  height: 220px;
-  margin: 0 auto 24px;
+  width: 240px;
+  height: 240px;
+  margin: 0 auto 26px;
 }
 
 .profile-image-wrapper img {
@@ -445,8 +461,8 @@
   display: flex;
   justify-content: center;
   position: relative;
-  min-width: 360px;
-  max-width: 560px;
+  min-width: 380px;
+  max-width: 600px;
 }
 
 .float-badge {
@@ -535,14 +551,14 @@
 /* Code Window */
 .code-window {
   position: absolute;
-  bottom: -50px;
-  right: -70px;
-  width: 280px;
-  background: rgba(15, 23, 42, 0.9);
-  border: 1px solid rgba(255, 255, 255, 0.1);
-  border-radius: 12px;
+  bottom: -60px;
+  right: -80px;
+  width: 320px;
+  background: rgba(15, 23, 42, 0.92);
+  border: 1px solid rgba(96, 165, 250, 0.16);
+  border-radius: 16px;
   overflow: hidden;
-  box-shadow: 0 10px 40px rgba(0, 0, 0, 0.5);
+  box-shadow: 0 18px 55px rgba(0, 0, 0, 0.35);
   z-index: 5;
   animation: float 6s ease-in-out infinite;
   animation-delay: 1s;

@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 import {
   FaHome,
   FaUser,
@@ -18,6 +18,17 @@ function Navbar() {
   const [isDark, setIsDark] = useState(true);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
+  const [activeLink, setActiveLink] = useState("#home");
+
+  const navItems = useMemo(
+    () => [
+      { href: "#home", label: "Home", icon: <FaHome /> },
+      { href: "#about", label: "About", icon: <FaUser /> },
+      { href: "#Experiences", label: "Experiences", icon: <FaLaptopCode /> },
+      { href: "#projects", label: "Projects", icon: <FaFolderOpen /> }
+    ],
+    []
+  );
 
   useEffect(() => {
     const body = document.body;
@@ -31,13 +42,27 @@ function Navbar() {
   useEffect(() => {
     const handleScroll = () => {
       setScrolled(window.scrollY > 30);
+      const offset = window.scrollY + window.innerHeight / 3;
+      const currentSection = navItems.reduce((current, item) => {
+        const section = document.querySelector(item.href);
+        if (section && section.offsetTop <= offset) {
+          return item.href;
+        }
+        return current;
+      }, "#home");
+      setActiveLink(currentSection);
     };
     window.addEventListener("scroll", handleScroll);
+    handleScroll();
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
   const toggleTheme = () => setIsDark((prev) => !prev);
   const toggleMobileMenu = () => setIsMobileMenuOpen((prev) => !prev);
+  const handleNavClick = (href) => {
+    setActiveLink(href);
+    setIsMobileMenuOpen(false);
+  };
 
   return (
     <nav className={`navbar ${scrolled ? "scrolled" : ""}`}>
@@ -51,18 +76,16 @@ function Navbar() {
 
         {/* Desktop Navigation */}
         <div className="nav-links">
-          <a href="#home" className="nav-link active" onClick={() => setIsMobileMenuOpen(false)}>
-            <span className="nav-dot"></span> Home
-          </a>
-          <a href="#about" className="nav-link" onClick={() => setIsMobileMenuOpen(false)}>
-            <span className="nav-dot"></span> About
-          </a>
-          <a href="#Experiences" className="nav-link" onClick={() => setIsMobileMenuOpen(false)}>
-            <span className="nav-dot"></span> Experiences
-          </a>
-          <a href="#projects" className="nav-link" onClick={() => setIsMobileMenuOpen(false)}>
-            <span className="nav-dot"></span> Projects
-          </a>
+          {navItems.map((item) => (
+            <a
+              key={item.href}
+              href={item.href}
+              className={`nav-link ${activeLink === item.href ? "active" : ""}`}
+              onClick={() => handleNavClick(item.href)}
+            >
+              <span className="nav-dot"></span> {item.label}
+            </a>
+          ))}
         </div>
 
         {/* Actions */}
@@ -91,10 +114,15 @@ function Navbar() {
 
       {/* Mobile Menu */}
       <div className={`mobile-menu ${isMobileMenuOpen ? "open" : ""}`}>
-        <a href="#home" onClick={() => setIsMobileMenuOpen(false)}><FaHome /> Home</a>
-        <a href="#about" onClick={() => setIsMobileMenuOpen(false)}><FaUser /> About</a>
-        <a href="#Experiences" onClick={() => setIsMobileMenuOpen(false)}><FaLaptopCode /> Experiences</a>
-        <a href="#projects" onClick={() => setIsMobileMenuOpen(false)}><FaFolderOpen /> Projects</a>
+        {navItems.map((item) => (
+          <a
+            key={item.href}
+            href={item.href}
+            onClick={() => handleNavClick(item.href)}
+          >
+            {item.icon} {item.label}
+          </a>
+        ))}
       </div>
     </nav>
   );
