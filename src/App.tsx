@@ -1,11 +1,8 @@
-
-
-
 import Navbar from './components/Navbar'
 import Footer from './components/Footer'
 import Headers from './components/Headers'
 import About from './components/About'
-import Services from './components/Services'
+import Experiences from './components/Experiences'
 import Project from './components/Project'
 import Contacts from './components/Contacts'
 import './App.css'
@@ -18,7 +15,7 @@ function App() {
       <Navbar />
       <Headers />
       <About />
-      <Services />
+      <Experiences />
       <Project />
       <Contacts />
       <Footer/>

@@ -12,11 +12,11 @@ function Contact() {
 
   const sanitize = (str) => {
     return str
-      .trim()
       .replace(/<script\b[^<]*(?:(?!<\/script>)<[^<]*)*<\/script>/gi, "")
       .replace(/<iframe\b[^<]*(?:(?!<\/iframe>)<[^<]*)*<\/iframe>/gi, "")
       .replace(/javascript:/gi, "")
-      .replace(/on\w+=/gi, "");
+      .replace(/on\w+=/gi, "")
+      .trim();
   };
 
   const isValidEmail = (email) => {
@@ -25,9 +25,8 @@ function Contact() {
 
   const handleChange = (e) => {
     const { name, value } = e.target;
-    const clean = name === "email" ? value.trim() : sanitize(value);
-    if (clean.length > 1000) return;
-    setFormData({ ...formData, [name]: clean });
+    if (value.length > 1000) return;
+    setFormData({ ...formData, [name]: value });
   };
 
   const handleSubmit = (e) => {
@@ -54,10 +53,10 @@ function Contact() {
       return;
     }
 
-    setTimeout(() => {
-      setStatus("Message sent successfully!");
-      setFormData({ name: "", email: "", message: "" });
-    }, 1000);
+    setStatus("Opening your email client...");
+
+    const mailtoLink = `mailto:reamkhorn12345@gmail.com?subject=Portfolio Contact from ${encodeURIComponent(name)}&body=${encodeURIComponent(`Name: ${name}\nEmail: ${email}\n\nMessage:\n${message}`)}`;
+    window.location.href = mailtoLink;
   };
 
   const copyToClipboard = (text) => {
