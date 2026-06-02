@@ -44,6 +44,15 @@ function About() {
                     curriculum covering modern technologies and real-world projects.
                   </p>
                 </div>
+                <div className="edu-item">
+                  <h4>High School Diploma</h4>
+                  <span className="edu-period">2021 - 2024</span>
+                  <div className="edu-status graduated">Graduated 2024</div>
+                  <p>
+                    Completed high school with strong results in science, mathematics, and digital 
+                    literacy, building a foundation for modern web development and technology studies.
+                  </p>
+                </div>
               </div>
             </div>
 
@@ -121,6 +130,17 @@ function About() {
                   </div>
                   <span className="journey-tag">Currently Enrolled</span>
                   <p>Bachelor's Degree in Full-Stack Web Development program focusing on modern technologies, real-world projects, and professional soft skills.</p>
+                </div>
+              </div>
+              <div className="journey-item">
+                <div className="journey-marker"></div>
+                <div className="journey-content">
+                  <div className="journey-header">
+                    <h4>High School Graduation</h4>
+                    <span className="journey-date"><FaCalendarAlt /> 2021 - 2024</span>
+                  </div>
+                  <span className="journey-tag past">2024 Graduate</span>
+                  <p>Graduated high school in 2024 with a focus on science, mathematics, and digital skills that support a modern development career.</p>
                 </div>
               </div>
               <div className="journey-item">

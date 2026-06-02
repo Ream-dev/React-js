@@ -1,4 +1,4 @@
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { FaShieldAlt, FaUsers, FaPalette, FaTrophy, FaBuilding, FaLaptopCode } from "react-icons/fa";
 import "../css/Services.css";
 import cybersecurityImage from "../assets/cybersecurity.png";
@@ -9,6 +9,8 @@ import companyVisitImage from "../assets/R1.png";
 import canvaCoreImage from "../assets/canva core.png";
 
 function Experiences() {
+  const [expandedId, setExpandedId] = useState(null);
+
   useEffect(() => {
     const expItems = document.querySelectorAll(".exp-item");
 
@@ -28,12 +30,17 @@ function Experiences() {
     return () => observer.disconnect();
   }, []);
 
+  const toggleExpand = (id) => {
+    setExpandedId((prev) => (prev === id ? null : id));
+  };
+
   const experiences = [
     {
       id: 1,
       icon: <FaShieldAlt />,
       title: "Cybersecurity Awareness Workshop",
-      description: "Attended comprehensive workshop on cybersecurity best practices, threat detection, and security protocols for modern web applications.",
+      description: "I learned simple ways to keep websites safe and spot online risks.",
+      more: "I learned about strong passwords, safe data handling, and how to check for threats in a clear, easy way.",
       image: cybersecurityImage,
       color: "#00d4ff",
       category: "Workshop"
@@ -42,7 +49,8 @@ function Experiences() {
       id: 2,
       icon: <FaUsers />,
       title: "Develop Youth of Cambodia",
-      description: "Contributed to youth development programs, mentoring young developers and fostering tech education in Cambodia.",
+      description: "I helped young people learn coding and work together in tech activities.",
+      more: "I taught and guided students, shared new ideas, and helped build their confidence with computers.",
       image: developYouthImage,
       color: "#ff6b6b",
       category: "Community"
@@ -51,7 +59,8 @@ function Experiences() {
       id: 3,
       icon: <FaPalette />,
       title: "Figma Design Workshop",
-      description: "Participated in UI/UX fundamentals workshop, mastering Figma tools, prototyping, and user-centered design principles.",
+      description: "I learned how to make clean app screens and easy designs with Figma.",
+      more: "I practiced drawing layouts, choosing colors, and making buttons and pages look simple and strong.",
       image: figmaWorkshopImage,
       color: "#a855f7",
       category: "Workshop"
@@ -60,7 +69,8 @@ function Experiences() {
       id: 4,
       icon: <FaTrophy />,
       title: "Competition with Youth of Cambodia",
-      description: "Competed in national tech competitions, showcasing skills and collaborating with talented young developers across Cambodia.",
+      description: "I joined a tech contest and showed what I could build.",
+      more: "I worked with a team, shared ideas, and learned how to present my project in a calm way.",
       image: competitionImage,
       color: "#f59e0b",
       category: "Competition"
@@ -69,7 +79,8 @@ function Experiences() {
       id: 5,
       icon: <FaBuilding />,
       title: "Company Visit",
-      description: "Visited leading tech companies to gain insights into industry practices, team workflows, and professional development opportunities.",
+      description: "I visited tech companies and saw how teams make real products.",
+      more: "I watched how people plan work, use tools, and talk together to make good websites and apps.",
       image: companyVisitImage,
       color: "#4ecdc4",
       category: "Industry"
@@ -78,7 +89,8 @@ function Experiences() {
       id: 6,
       icon: <FaLaptopCode />,
       title: "Canva Core",
-      description: "Mastered Canva design tools for creating professional graphics, social media content, and visual branding materials.",
+      description: "I learned to make simple graphics and content for social media.",
+      more: "I used Canva to build nice pictures, banners, and visual content that looks modern and clean.",
       image: canvaCoreImage,
       color: "#61dafb",
       category: "Design"
@@ -105,44 +117,60 @@ function Experiences() {
 
         {/* Experiences Grid */}
         <div className="services-grid">
-          {experiences.map((exp, index) => (
-            <div
-              key={exp.id}
-              className="exp-item service-item"
-              style={{ '--service-color': exp.color, '--delay': `${index * 0.1}s` }}
-            >
-              <div className="service-glow"></div>
-              <div className="service-background"></div>
-              
-              {/* Image Section */}
-              <div className="exp-image-container">
-                <img 
-                  src={exp.image} 
-                  alt={exp.title}
-                  className="exp-image"
-                  onError={(e) => {
-                    e.target.style.display = 'none';
-                    e.target.nextElementSibling.style.display = 'flex';
-                  }}
-                />
-                <div className="exp-icon-fallback" style={{ display: 'none' }}>
-                  {exp.icon}
+          {experiences.map((exp, index) => {
+            const isExpanded = expandedId === exp.id;
+            return (
+              <div
+                key={exp.id}
+                className={`exp-item service-item ${isExpanded ? "expanded" : ""}`}
+                style={{ '--service-color': exp.color, '--delay': `${index * 0.1}s` }}
+              >
+                <div className="service-glow"></div>
+                <div className="service-background"></div>
+                
+                {/* Image Section */}
+                <div className="exp-image-container">
+                  <img 
+                    src={exp.image} 
+                    alt={exp.title}
+                    className="exp-image"
+                    onError={(e) => {
+                      e.target.style.display = 'none';
+                      e.target.nextElementSibling.style.display = 'flex';
+                    }}
+                  />
+                  <div className="exp-icon-fallback" style={{ display: 'none' }}>
+                    {exp.icon}
+                  </div>
+                  <div className="exp-category-badge">
+                    {exp.category}
+                  </div>
                 </div>
-                <div className="exp-category-badge">
-                  {exp.category}
+
+                {/* Content Section */}
+                <div className="exp-content">
+                  <h3 className="exp-title">{exp.title}</h3>
+                  <p className="exp-description">{exp.description}</p>
+                  {isExpanded && <p className="exp-more">{exp.more}</p>}
+                  <button
+                    type="button"
+                    className="exp-toggle-btn"
+                    onClick={(e) => {
+                      e.preventDefault();
+                      e.stopPropagation();
+                      toggleExpand(exp.id);
+                    }}
+                    aria-expanded={isExpanded}
+                  >
+                    {isExpanded ? "Show less" : "See more"}
+                  </button>
                 </div>
-              </div>
 
-              {/* Content Section */}
-              <div className="exp-content">
-                <h3 className="exp-title">{exp.title}</h3>
-                <p className="exp-description">{exp.description}</p>
+                {/* Animated Border */}
+                <div className="service-border"></div>
               </div>
-
-              {/* Animated Border */}
-              <div className="service-border"></div>
-            </div>
-          ))}
+            );
+          })}
         </div>
       </div>
     </section>

@@ -9,7 +9,7 @@ function Headers() {
     "Modern Full Stack Developer",
     "React & Node.js Specialist",
     "UI/UX-Focused Engineer",
-    "Cloud-Ready Creator"
+    "Database Creator"
   ];
 
   const [text, setText] = useState("");
@@ -61,7 +61,7 @@ function Headers() {
           <p>
             Before: simple websites. Now: modern digital products with polished UI, 
             fast performance, and scalable architecture. I build web experiences 
-            that feel fresh, functional, and ready for today.
+            that feel fresh, functional, and ready for today — designed to impress hiring teams and support product growth.
           </p>
 
           <div className="hero-stats">

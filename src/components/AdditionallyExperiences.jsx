@@ -1,10 +1,19 @@
-import { useEffect } from "react";
-import { FaShieldAlt, FaUsers, FaChalkboardTeacher, FaTrophy, FaBuilding, FaPalette } from "react-icons/fa";
+import { useEffect, useRef } from "react";
+import {
+  FaShieldAlt,
+  FaUsers,
+  FaChalkboardTeacher,
+  FaTrophy,
+  FaBuilding,
+  FaPalette
+} from "react-icons/fa";
 import "../css/AdditionallyExperiences.css";
 
 function AdditionallyExperiences() {
+  const containerRef = useRef(null);
+
   useEffect(() => {
-    const experienceItems = document.querySelectorAll(".experience-item");
+    const items = containerRef.current?.querySelectorAll(".experience-card");
 
     const observer = new IntersectionObserver(
       (entries) => {
@@ -14,10 +23,10 @@ function AdditionallyExperiences() {
           }
         });
       },
-      { threshold: 0.2 }
+      { threshold: 0.15 }
     );
 
-    experienceItems.forEach((item) => observer.observe(item));
+    items?.forEach((item) => observer.observe(item));
 
     return () => observer.disconnect();
   }, []);
@@ -27,7 +36,8 @@ function AdditionallyExperiences() {
       id: 1,
       icon: <FaShieldAlt />,
       title: "Cybersecurity Awareness Workshop",
-      description: "Attended comprehensive workshop covering cybersecurity fundamentals, threat awareness, and best practices for digital security.",
+      description:
+        "Learned cybersecurity fundamentals, threat detection, and digital safety practices.",
       image: "/cybersecurity.png",
       color: "#ef4444",
       level: 95,
@@ -37,7 +47,8 @@ function AdditionallyExperiences() {
       id: 2,
       icon: <FaUsers />,
       title: "Develop Youth of Cambodia",
-      description: "Contributed to youth development programs focused on technology education and skill building for young Cambodians.",
+      description:
+        "Contributed to youth tech education and skill development programs.",
       image: "/develop yuth of combodia.png",
       color: "#3b82f6",
       level: 90,
@@ -46,9 +57,9 @@ function AdditionallyExperiences() {
     {
       id: 3,
       icon: <FaChalkboardTeacher />,
-      title: "Figma Design Workshop",
-      subtitle: "UI/UX Fundamentals",
-      description: "Participated in intensive Figma design workshop learning UI/UX principles, prototyping, and modern design workflows.",
+      title: "Figma UI/UX Workshop",
+      description:
+        "Practiced UI/UX design, wireframing, and prototyping using Figma.",
       image: "/Fima desing workshop.png",
       color: "#a855f7",
       level: 88,
@@ -57,8 +68,9 @@ function AdditionallyExperiences() {
     {
       id: 4,
       icon: <FaTrophy />,
-      title: "Competition with Youth of Cambodia",
-      description: "Competed in technology and innovation challenges alongside talented youth from across Cambodia.",
+      title: "Innovation Competition",
+      description:
+        "Competed in national-level tech and innovation challenges.",
       image: "/compatition with yuth of cambodia.png",
       color: "#f59e0b",
       level: 85,
@@ -67,8 +79,9 @@ function AdditionallyExperiences() {
     {
       id: 5,
       icon: <FaBuilding />,
-      title: "Company Visit",
-      description: "Visited leading tech companies to gain insights into industry practices, workflows, and professional environments.",
+      title: "Tech Company Visit",
+      description:
+        "Explored real-world company workflows and engineering environments.",
       image: "/R1.png",
       color: "#10b981",
       level: 80,
@@ -77,8 +90,9 @@ function AdditionallyExperiences() {
     {
       id: 6,
       icon: <FaPalette />,
-      title: "Canva Core",
-      description: "Mastered Canva design platform for creating professional graphics, presentations, and visual content.",
+      title: "Canva Design Mastery",
+      description:
+        "Created professional graphics and presentation designs using Canva.",
       image: "/canva core.png",
       color: "#ec4899",
       level: 92,
@@ -87,83 +101,67 @@ function AdditionallyExperiences() {
   ];
 
   return (
-    <section className="experiences-section" id="experiences">
-      <div className="experiences-container">
-        {/* Header Section */}
-        <div className="experiences-header">
-          <div className="header-badge">
-            <span className="badge-text">🎯 Additional Experiences</span>
-          </div>
-          <h2 className="section-title">
-            <span className="title-main">Beyond The</span>
-            <span className="title-accent">Classroom</span>
+    <section className="exp-section" id="experiences">
+      <div className="exp-container" ref={containerRef}>
+        
+        {/* Header */}
+        <div className="exp-header">
+          <span className="exp-badge">🎯 Experiences</span>
+          <h2>
+            Beyond <span>Classroom Learning</span>
           </h2>
-          <div className="title-underline"></div>
-          <p className="section-subtitle">
-            Workshops, competitions, and activities that have shaped my professional journey
+          <p>
+            Workshops, competitions, and real-world activities shaping my journey
           </p>
         </div>
 
-        {/* Experiences Grid */}
-        <div className="experiences-grid">
-          {experiences.map((experience, index) => (
+        {/* Grid */}
+        <div className="exp-grid">
+          {experiences.map((exp, i) => (
             <div
-              key={experience.id}
-              className="experience-item"
-              style={{ '--experience-color': experience.color, '--delay': `${index * 0.1}s` }}
+              key={exp.id}
+              className="experience-card"
+              style={{
+                "--accent": exp.color,
+                "--delay": `${i * 0.08}s`
+              }}
             >
-              <div className="experience-glow"></div>
-              <div className="experience-background"></div>
-              
-              {/* Experience Image */}
-              <div className="experience-image-container">
-                <img 
-                  src={experience.image} 
-                  alt={experience.title}
-                  className="experience-image"
-                  onError={(e) => {
-                    e.target.style.display = 'none';
-                    e.target.parentElement.classList.add('no-image');
-                  }}
+              {/* glow */}
+              <div className="card-glow"></div>
+
+              {/* image */}
+              <div className="card-image">
+                <img
+                  src={exp.image}
+                  alt={exp.title}
+                  onError={(e) => (e.target.style.display = "none")}
                 />
-                <div className="image-overlay"></div>
-              </div>
-              
-              {/* Experience Header */}
-              <div className="experience-header">
-                <div className="experience-icon-container">
-                  <div className="experience-icon">
-                    {experience.icon}
-                  </div>
-                  <div className="icon-glow"></div>
-                </div>
-                <div className="experience-meta">
-                  <h3 className="experience-title">{experience.title}</h3>
-                  {experience.subtitle && (
-                    <span className="experience-subtitle">{experience.subtitle}</span>
-                  )}
-                  <div className="experience-stats">
-                    <span className="stat-year">{experience.year}</span>
-                    <span className="stat-level">{experience.level}% Completion</span>
-                  </div>
-                </div>
+                <div className="image-fade"></div>
               </div>
 
-              {/* Experience Content */}
-              <div className="experience-content">
-                <p className="experience-description">{experience.description}</p>
-                
-                {/* Progress Bar */}
-                <div className="progress-container">
-                  <div className="progress-bar">
-                    <div className="progress-fill" style={{ width: `${experience.level}%` }}></div>
-                  </div>
-                  <span className="progress-text">{experience.level}%</span>
+              {/* content */}
+              <div className="card-body">
+                <div className="card-top">
+                  <div className="icon">{exp.icon}</div>
+                  <span className="year">{exp.year}</span>
+                </div>
+
+                <h3>{exp.title}</h3>
+                <p>{exp.description}</p>
+
+                {/* progress */}
+                <div className="progress">
+                  <div
+                    className="progress-fill"
+                    style={{ width: `${exp.level}%` }}
+                  ></div>
+                </div>
+
+                <div className="progress-label">
+                  <span>Progress</span>
+                  <b>{exp.level}%</b>
                 </div>
               </div>
-
-              {/* Animated Border */}
-              <div className="experience-border"></div>
             </div>
           ))}
         </div>

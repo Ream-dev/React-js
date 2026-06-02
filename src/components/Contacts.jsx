@@ -71,6 +71,7 @@ function Contact() {
       value: "reamkhorn12345@gmail.com",
       href: "mailto:reamkhorn12345@gmail.com",
       copy: "reamkhorn12345@gmail.com",
+      more: "Tap to copy email or press the button to open your mail app.",
     },
     {
       icon: <FaPhone />,
@@ -78,20 +79,29 @@ function Contact() {
       value: "+855 863 393 350",
       href: "tel:+855863393350",
       copy: "+855 863 393 350",
+      more: "Tap to copy the number. You can call or message me anytime.",
     },
     {
       icon: <FaLinkedin />,
       label: "LinkedIn",
       value: "linkedin.com/in/ream",
       href: "https://linkedin.com/in/ream",
+      more: "Visit my LinkedIn to see my experience and connect.",
     },
     {
       icon: <FaGithub />,
       label: "GitHub",
       value: "github.com/Ream111222333",
       href: "https://github.com/Ream111222333",
+      more: "See my code and projects on GitHub.",
     },
   ];
+
+  const [expandedContact, setExpandedContact] = useState(null);
+
+  const toggleContact = (idx) => {
+    setExpandedContact((prev) => (prev === idx ? null : idx));
+  };
 
   return (
     <section className="contact" id="contact">
@@ -109,27 +119,49 @@ function Contact() {
         <div className="contact-info">
           <h3 className="contact-subtitle">Contact Info</h3>
           <div className="info-grid">
-            {contacts.map((c, i) => (
-              <a
-                key={i}
-                href={c.href}
-                target={c.href.startsWith("http") ? "_blank" : undefined}
-                rel={c.href.startsWith("http") ? "noopener noreferrer" : undefined}
-                className="info-card"
-                onClick={(e) => {
-                  if (c.copy) {
-                    e.preventDefault();
-                    copyToClipboard(c.copy);
-                  }
-                }}
-              >
-                <div className="info-icon">{c.icon}</div>
-                <div className="info-details">
-                  <span className="info-label">{c.label}</span>
-                  <span className="info-value">{c.value}</span>
-                </div>
-              </a>
-            ))}
+            {contacts.map((c, i) => {
+              const isExpanded = expandedContact === i;
+              const isExternal = c.href && c.href.startsWith("http");
+              return (
+                <a
+                  key={i}
+                  href={c.href}
+                  target={isExternal ? "_blank" : undefined}
+                  rel={isExternal ? "noopener noreferrer" : undefined}
+                  className={`info-card ${isExpanded ? "expanded" : ""}`}
+                  onClick={(e) => {
+                    // if card has copy, copy instead of navigating
+                    if (c.copy) {
+                      e.preventDefault();
+                      copyToClipboard(c.copy);
+                    }
+                  }}
+                >
+                  <div className="info-icon">{c.icon}</div>
+                  <div className="info-details">
+                    <div style={{display:'flex',gap:12,alignItems:'center'}}>
+                      <div style={{flex:1}}>
+                        <span className="info-label">{c.label}</span>
+                        <span className="info-value">{c.value}</span>
+                      </div>
+                      <button
+                        type="button"
+                        className="info-toggle"
+                        onClick={(ev) => {
+                          ev.preventDefault();
+                          ev.stopPropagation();
+                          toggleContact(i);
+                        }}
+                        aria-expanded={isExpanded}
+                      >
+                        {isExpanded ? "Hide" : "Show"}
+                      </button>
+                    </div>
+                    {isExpanded && c.more && <div className="info-more">{c.more}</div>}
+                  </div>
+                </a>
+              );
+            })}
           </div>
         </div>
 

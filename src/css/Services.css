@@ -1,18 +1,33 @@
 /* Ultra Modern Services Page */
 .services-section {
-  padding: 0;
-  min-height: 100vh;
-  background: #0a0a0a;
+  padding: 60px 0 60px;
+  min-height: auto;
+  background: radial-gradient(circle at top left, rgba(99, 102, 241, 0.14), transparent 28%),
+              radial-gradient(circle at bottom right, rgba(14, 165, 233, 0.08), transparent 32%),
+              #070b14;
   color: white;
   position: relative;
   overflow: hidden;
+}
+
+.services-container {
+  position: relative;
+  z-index: 2;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 100px 20px 80px;
 }
 
 /* Experiences Item Styles */
 .exp-item {
   display: flex;
   flex-direction: column;
-  min-height: 320px;
+  min-height: 300px;
+  border-radius: 26px;
+  overflow: hidden;
+  background: rgba(16, 24, 40, 0.96);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  box-shadow: 0 20px 45px rgba(0, 0, 0, 0.28);
 }
 
 .exp-image-container {
@@ -85,10 +100,42 @@
 }
 
 .exp-description {
-  color: #9ca3af;
-  line-height: 1.5;
-  font-size: 0.85rem;
+  color: #d1d5db;
+  line-height: 1.6;
+  font-size: 0.92rem;
   flex: 1;
+  margin-bottom: 0;
+}
+
+.exp-more {
+  color: #cbd5e1;
+  line-height: 1.7;
+  font-size: 0.9rem;
+  margin-top: 14px;
+}
+
+.exp-toggle-btn {
+  margin-top: 20px;
+  align-self: flex-start;
+  background: linear-gradient(135deg, #6366f1, #8b5cf6);
+  color: white;
+  border: none;
+  padding: 10px 18px;
+  border-radius: 999px;
+  font-size: 0.85rem;
+  font-weight: 700;
+  cursor: pointer;
+  transition: transform 0.2s ease, box-shadow 0.2s ease, background 0.2s ease;
+}
+
+.exp-toggle-btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 12px 20px rgba(99, 102, 241, 0.25);
+}
+
+.exp-toggle-btn:focus {
+  outline: 2px solid rgba(99, 102, 241, 0.6);
+  outline-offset: 2px;
 }
 
 .services-container {
@@ -102,19 +149,19 @@
 /* Header Section */
 .services-header {
   text-align: center;
-  margin-bottom: 100px;
+  margin-bottom: 80px;
 }
 
 .header-badge {
   display: inline-block;
-  background: linear-gradient(135deg, #6366f1, #8b5cf6);
-  padding: 6px 16px;
-  border-radius: 50px;
-  margin-bottom: 24px;
-  box-shadow: 0 4px 20px rgba(99, 102, 241, 0.3);
-  font-size: 0.75rem;
-  font-weight: 500;
-  letter-spacing: 0.05em;
+  background: linear-gradient(135deg, rgba(99, 102, 241, 0.9), rgba(139, 92, 246, 0.9));
+  padding: 8px 18px;
+  border-radius: 999px;
+  margin-bottom: 18px;
+  box-shadow: 0 6px 24px rgba(99, 102, 241, 0.24);
+  font-size: 0.78rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
   text-transform: uppercase;
 }
 
@@ -123,11 +170,11 @@
 }
 
 .section-title {
-  font-size: 4rem;
+  font-size: clamp(2.6rem, 5vw, 3.6rem);
   font-weight: 900;
-  margin-bottom: 24px;
-  line-height: 1;
-  letter-spacing: -0.02em;
+  margin-bottom: 20px;
+  line-height: 1.02;
+  letter-spacing: -0.03em;
 }
 
 .title-main {
@@ -144,19 +191,19 @@
 }
 
 .title-underline {
-  width: 60px;
-  height: 3px;
+  width: 70px;
+  height: 4px;
   background: linear-gradient(135deg, #6366f1, #8b5cf6);
-  margin: 0 auto 32px;
-  border-radius: 2px;
+  margin: 0 auto 24px;
+  border-radius: 999px;
 }
 
 .section-subtitle {
-  color: #9ca3af;
-  font-size: 1.125rem;
-  max-width: 600px;
+  color: #a6b0c3;
+  font-size: 1rem;
+  max-width: 640px;
   margin: 0 auto;
-  line-height: 1.6;
+  line-height: 1.75;
   font-weight: 400;
 }
 
@@ -171,14 +218,14 @@
 /* Service Item */
 .service-item {
   position: relative;
-  background: #111111;
-  border-radius: 20px;
+  background: rgba(8, 15, 24, 0.98);
+  border-radius: 26px;
   padding: 0;
-  border: 1px solid #1f1f1f;
-  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-  cursor: pointer;
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  transition: all 0.35s ease;
+  cursor: default;
   opacity: 0;
-  transform: translateY(30px);
+  transform: translateY(24px);
   overflow: hidden;
   animation-delay: var(--delay, 0s);
 }
@@ -189,16 +236,16 @@
 }
 
 .service-item:hover {
-  transform: translateY(-8px);
-  border-color: #2f2f2f;
-  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.4);
+  transform: translateY(-6px);
+  border-color: rgba(99, 102, 241, 0.22);
+  box-shadow: 0 18px 40px rgba(0, 0, 0, 0.22);
 }
 
 .service-item.expanded {
-  transform: translateY(-15px) scale(1.05);
+  transform: translateY(-10px);
   border-color: var(--service-color, #38bdf8);
-  box-shadow: 0 40px 80px rgba(56, 189, 248, 0.3);
-  z-index: 20;
+  box-shadow: 0 28px 65px rgba(56, 189, 248, 0.22);
+  z-index: 10;
 }
 
 /* Service Header */
