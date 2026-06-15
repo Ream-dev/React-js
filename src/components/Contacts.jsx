@@ -92,7 +92,7 @@ function Contact() {
       icon: <FaGithub />,
       label: "GitHub",
       value: "github.com/Ream111222333",
-      href: "https://github.com/Ream111222333",
+      href: "https://github.com/Ream-dev",
       more: "See my code and projects on GitHub.",
     },
   ];

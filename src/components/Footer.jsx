@@ -86,7 +86,7 @@ function Footer() {
         <div className="footer-connect">
           <h4>Connect</h4>
           <div className="social-row">
-            <a href="https://github.com/Ream111222333" target="_blank" rel="noopener noreferrer" aria-label="GitHub">
+            <a href="https://github.com/Ream-dev" target="_blank" rel="noopener noreferrer" aria-label="GitHub">
               <FaGithub />
             </a>
             <a href="https://linkedin.com/in/ream" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn">
