@@ -1,19 +1,18 @@
-import { useEffect, useRef } from "react";
-import {
-  FaShieldAlt,
-  FaUsers,
-  FaChalkboardTeacher,
-  FaTrophy,
-  FaBuilding,
-  FaPalette
-} from "react-icons/fa";
+import { useEffect, useState } from "react";
+import { FaShieldAlt, FaUsers, FaPalette, FaTrophy, FaBuilding, FaLaptopCode } from "react-icons/fa";
 import "../css/AdditionallyExperiences.css";
+import cybersecurityImage from "../assets/cybersecurity.png";
+import developYouthImage from "../assets/develop yuth of combodia.png";
+import figmaWorkshopImage from "../assets/Fima desing workshop.png";
+import competitionImage from "../assets/compatition with yuth of cambodia.png";
+import companyVisitImage from "../assets/R1.png";
+import canvaCoreImage from "../assets/canva core.png";
 
 function AdditionallyExperiences() {
-  const containerRef = useRef(null);
+  const [expandedId, setExpandedId] = useState(null);
 
   useEffect(() => {
-    const items = containerRef.current?.querySelectorAll(".experience-card");
+    const expItems = document.querySelectorAll(".exp-item");
 
     const observer = new IntersectionObserver(
       (entries) => {
@@ -23,23 +22,28 @@ function AdditionallyExperiences() {
           }
         });
       },
-      { threshold: 0.15 }
+      { threshold: 0.2 }
     );
 
-    items?.forEach((item) => observer.observe(item));
+    expItems.forEach((item) => observer.observe(item));
 
     return () => observer.disconnect();
   }, []);
+
+  const toggleExpand = (id) => {
+    setExpandedId((prev) => (prev === id ? null : id));
+  };
 
   const experiences = [
     {
       id: 1,
       icon: <FaShieldAlt />,
       title: "Cybersecurity Awareness Workshop",
-      description:
-        "Learned cybersecurity fundamentals, threat detection, and digital safety practices.",
-      image: "/cybersecurity.png",
-      color: "#ef4444",
+      description: "Learned cybersecurity fundamentals, threat detection, and digital safety practices.",
+      more: "Deep-dived into network security, encryption methods, and incident response protocols through hands-on labs.",
+      image: cybersecurityImage,
+      color: "#00d4ff",
+      category: "Workshop",
       level: 95,
       year: "2026"
     },
@@ -47,21 +51,23 @@ function AdditionallyExperiences() {
       id: 2,
       icon: <FaUsers />,
       title: "Develop Youth of Cambodia",
-      description:
-        "Contributed to youth tech education and skill development programs.",
-      image: "/develop yuth of combodia.png",
-      color: "#3b82f6",
+      description: "Contributed to youth tech education and skill development programs.",
+      more: "Mentored students in programming fundamentals, organized coding bootcamps, and built community tech initiatives.",
+      image: developYouthImage,
+      color: "#ff6b6b",
+      category: "Community",
       level: 90,
       year: "2026"
     },
     {
       id: 3,
-      icon: <FaChalkboardTeacher />,
+      icon: <FaPalette />,
       title: "Figma UI/UX Workshop",
-      description:
-        "Practiced UI/UX design, wireframing, and prototyping using Figma.",
-      image: "/Fima desing workshop.png",
+      description: "Practiced UI/UX design, wireframing, and prototyping using Figma.",
+      more: "Mastered design systems, component libraries, and interactive prototyping for real-world applications.",
+      image: figmaWorkshopImage,
       color: "#a855f7",
+      category: "Workshop",
       level: 88,
       year: "2026"
     },
@@ -69,10 +75,11 @@ function AdditionallyExperiences() {
       id: 4,
       icon: <FaTrophy />,
       title: "Innovation Competition",
-      description:
-        "Competed in national-level tech and innovation challenges.",
-      image: "/compatition with yuth of cambodia.png",
+      description: "Competed in national-level tech and innovation challenges.",
+      more: "Built and pitched a full-stack solution, collaborating with cross-functional teams under tight deadlines.",
+      image: competitionImage,
       color: "#f59e0b",
+      category: "Competition",
       level: 85,
       year: "2026"
     },
@@ -80,21 +87,23 @@ function AdditionallyExperiences() {
       id: 5,
       icon: <FaBuilding />,
       title: "Tech Company Visit",
-      description:
-        "Explored real-world company workflows and engineering environments.",
-      image: "/R1.png",
-      color: "#10b981",
+      description: "Explored real-world company workflows and engineering environments.",
+      more: "Shadowed senior engineers, attended architecture reviews, and learned CI/CD and agile practices firsthand.",
+      image: companyVisitImage,
+      color: "#4ecdc4",
+      category: "Industry",
       level: 80,
       year: "2026"
     },
     {
       id: 6,
-      icon: <FaPalette />,
+      icon: <FaLaptopCode />,
       title: "Canva Design Mastery",
-      description:
-        "Created professional graphics and presentation designs using Canva.",
-      image: "/canva core.png",
-      color: "#ec4899",
+      description: "Created professional graphics and presentation designs using Canva.",
+      more: "Designed brand assets, social media campaigns, and marketing collateral following modern design principles.",
+      image: canvaCoreImage,
+      color: "#61dafb",
+      category: "Design",
       level: 92,
       year: "2026"
     }
@@ -102,68 +111,90 @@ function AdditionallyExperiences() {
 
   return (
     <section className="exp-section" id="experiences">
-      <div className="exp-container" ref={containerRef}>
-        
-        {/* Header */}
+      <div className="exp-container">
+        {/* Header Section */}
         <div className="exp-header">
-          <span className="exp-badge">🎯 Experiences</span>
-          <h2>
-            Beyond <span>Classroom Learning</span>
+          <div className="header-badge">
+            <span className="badge-text">🎯 Additional Experiences</span>
+          </div>
+          <h2 className="section-title">
+            <span className="title-main">Beyond</span>
+            <span className="title-accent">Classroom Learning</span>
           </h2>
-          <p>
+          <div className="title-underline"></div>
+          <p className="section-subtitle">
             Workshops, competitions, and real-world activities shaping my journey
           </p>
         </div>
 
-        {/* Grid */}
+        {/* Experiences Grid */}
         <div className="exp-grid">
-          {experiences.map((exp, i) => (
-            <div
-              key={exp.id}
-              className="experience-card"
-              style={{
-                "--accent": exp.color,
-                "--delay": `${i * 0.08}s`
-              }}
-            >
-              {/* glow */}
-              <div className="card-glow"></div>
+          {experiences.map((exp, index) => {
+            const isExpanded = expandedId === exp.id;
+            return (
+              <div
+                key={exp.id}
+                className={`exp-item ${isExpanded ? "expanded" : ""}`}
+                style={{ '--service-color': exp.color, '--delay': `${index * 0.1}s` }}
+              >
+                <div className="service-glow"></div>
+                <div className="service-background"></div>
+                
+                {/* Image Section */}
+                <div className="exp-image-container">
+                  <img 
+                    src={exp.image} 
+                    alt={exp.title}
+                    className="exp-image"
+                    onError={(e) => {
+                      e.target.style.display = 'none';
+                      e.target.nextElementSibling.style.display = 'flex';
+                    }}
+                  />
+                  <div className="exp-icon-fallback" style={{ display: 'none' }}>
+                    {exp.icon}
+                  </div>
+                  <div className="exp-category-badge">
+                    {exp.category}
+                  </div>
+                </div>
 
-              {/* image */}
-              <div className="card-image">
-                <img
-                  src={exp.image}
-                  alt={exp.title}
-                  onError={(e) => (e.target.style.display = "none")}
-                />
-                <div className="image-fade"></div>
+                {/* Content Section */}
+                <div className="exp-content">
+                  <h3 className="exp-title">{exp.title}</h3>
+                  <p className="exp-description">{exp.description}</p>
+                  {isExpanded && <p className="exp-more">{exp.more}</p>}
+                  
+                  {/* Progress Bar */}
+                  <div className="progress-container">
+                    <div className="progress-bar">
+                      <div 
+                        className="progress-fill" 
+                        style={{ width: `${exp.level}%` }}
+                      ></div>
+                    </div>
+                    <span className="progress-text">{exp.level}%</span>
+                  </div>
+
+                  <button
+                    type="button"
+                    className="exp-toggle-btn"
+                    onClick={(e) => {
+                      e.preventDefault();
+                      e.stopPropagation();
+                      toggleExpand(exp.id);
+                    }}
+                    aria-expanded={isExpanded}
+                  >
+                    {isExpanded ? "Show less" : "See more"}
+                  </button>
+                </div>
+
+                {/* Animated Border */}
+                <div className="service-border"></div>
               </div>
-
-              {/* content */}
-              <div className="card-body">
-                <div className="card-top">
-                  <div className="icon">{exp.icon}</div>
-                  <span className="year">{exp.year}</span>
-                </div>
-
-                <h3>{exp.title}</h3>
-                <p>{exp.description}</p>
-
-                {/* progress */}
-                <div className="progress">
-                  <div
-                    className="progress-fill"
-                    style={{ width: `${exp.level}%` }}
-                  ></div>
-                </div>
-
-                <div className="progress-label">
-                  <span>Progress</span>
-                  <b>{exp.level}%</b>
-                </div>
-              </div>
-            </div>
-          ))}
+            );
+          })}
         </div>
       </div>
     </section>
