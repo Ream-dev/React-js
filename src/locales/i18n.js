@@ -23,10 +23,10 @@ const translations = {
         "Database Creator",
       ],
       description:
-        "Before: simple websites. Now: modern digital products with polished UI, fast performance, and scalable architecture. I build web experiences that feel fresh, functional, and ready for today — designed to impress hiring teams and support product growth.",
+        "Before: simple websites. Now: modern digital products with polished UI, fast performance, and scalable architecture. I build web experiences that feel fresh, functional, and ready for today — designed to impress hiring teams and support product growth. Right now I am looking for a job and internship to gain my experiences in the future.",
       stats: [
         { number: "2+", label: "Years" },
-        { number: "15+", label: "Projects" },
+        { number: "14+", label: "Projects" },
         { number: "100%", label: "Dedicated" },
       ],
       viewWork: "View My Work",
