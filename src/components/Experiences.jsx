@@ -1,14 +1,28 @@
 import { useEffect, useState } from "react";
-import { FaShieldAlt, FaUsers, FaPalette, FaTrophy, FaBuilding, FaLaptopCode } from "react-icons/fa";
-import "../css/Services.css";
+import {
+  FaShieldAlt,
+  FaUsers,
+  FaPalette,
+  FaTrophy,
+  FaBuilding,
+  FaLaptopCode,
+  FaChevronDown,
+  FaCalendarAlt,
+  FaLightbulb,
+  FaStar,
+  FaTag,
+} from "react-icons/fa";
+import "../css/AdditionallyExperiences.css";
 import cybersecurityImage from "../assets/cybersecurity.png";
 import developYouthImage from "../assets/develop yuth of combodia.png";
 import figmaWorkshopImage from "../assets/Fima desing workshop.png";
 import competitionImage from "../assets/compatition with yuth of cambodia.png";
 import companyVisitImage from "../assets/R1.png";
 import canvaCoreImage from "../assets/canva core.png";
+import { useLanguage } from "../contexts/LanguageContext";
 
 function Experiences() {
+  const { t, lang } = useLanguage();
   const [expandedId, setExpandedId] = useState(null);
 
   useEffect(() => {
@@ -22,7 +36,7 @@ function Experiences() {
           }
         });
       },
-      { threshold: 0.2 }
+      { threshold: 0.15 }
     );
 
     expItems.forEach((item) => observer.observe(item));
@@ -34,96 +48,39 @@ function Experiences() {
     setExpandedId((prev) => (prev === id ? null : id));
   };
 
-  const experiences = [
-    {
-      id: 1,
-      icon: <FaShieldAlt />,
-      title: "Cybersecurity Awareness Workshop",
-      description: "I learned simple ways to keep websites safe and spot online risks.",
-      more: "I learned about strong passwords, safe data handling, and how to check for threats in a clear, easy way.",
-      image: cybersecurityImage,
-      color: "#00d4ff",
-      category: "Workshop"
-    },
-    {
-      id: 2,
-      icon: <FaUsers />,
-      title: "Develop Youth of Cambodia",
-      description: "I helped young people learn coding and work together in tech activities.",
-      more: "I taught and guided students, shared new ideas, and helped build their confidence with computers.",
-      image: developYouthImage,
-      color: "#ff6b6b",
-      category: "Community"
-    },
-    {
-      id: 3,
-      icon: <FaPalette />,
-      title: "Figma Design Workshop",
-      description: "I learned how to make clean app screens and easy designs with Figma.",
-      more: "I practiced drawing layouts, choosing colors, and making buttons and pages look simple and strong.",
-      image: figmaWorkshopImage,
-      color: "#a855f7",
-      category: "Workshop"
-    },
-    {
-      id: 4,
-      icon: <FaTrophy />,
-      title: "Competition with Youth of Cambodia",
-      description: "I joined a tech contest and showed what I could build.",
-      more: "I worked with a team, shared ideas, and learned how to present my project in a calm way.",
-      image: competitionImage,
-      color: "#f59e0b",
-      category: "Competition"
-    },
-    {
-      id: 5,
-      icon: <FaBuilding />,
-      title: "Company Visit",
-      description: "I visited tech companies and saw how teams make real products.",
-      more: "I watched how people plan work, use tools, and talk together to make good websites and apps.",
-      image: companyVisitImage,
-      color: "#4ecdc4",
-      category: "Industry"
-    },
-    {
-      id: 6,
-      icon: <FaLaptopCode />,
-      title: "Canva Core",
-      description: "I learned to make simple graphics and content for social media.",
-      more: "I used Canva to build nice pictures, banners, and visual content that looks modern and clean.",
-      image: canvaCoreImage,
-      color: "#61dafb",
-      category: "Design"
-    }
-  ];
+  const expIcons = [<FaShieldAlt />, <FaUsers />, <FaPalette />, <FaTrophy />, <FaBuilding />, <FaLaptopCode />];
+
+  const expImages = [cybersecurityImage, developYouthImage, figmaWorkshopImage, competitionImage, companyVisitImage, canvaCoreImage];
+
+  const expColors = ["#00d4ff", "#ff6b6b", "#a855f7", "#f59e0b", "#4ecdc4", "#61dafb"];
+  const expColorsRgb = ["0, 212, 255", "255, 107, 107", "168, 85, 247", "245, 158, 11", "78, 205, 196", "97, 218, 251"];
+  const years = ["2026", "2026", "2026", "2026", "2026", "2026"];
 
   return (
-    <section className="services-section" id="Experiences">
-      <div className="services-container">
+    <section className="exp-section" id="Experiences">
+      <div className="exp-container">
         {/* Header Section */}
-        <div className="services-header">
+        <div className="exp-header">
           <div className="header-badge">
-            <span className="badge-text">🎯 Additional Experiences</span>
+            <span className="badge-text">{t.experiences.badge}</span>
           </div>
           <h2 className="section-title">
-            <span className="title-main">My Journey</span>
-            <span className="title-accent">& Achievements</span>
+            <span className="title-main">{t.experiences.titleMain}</span>
+            <span className="title-accent">{t.experiences.titleAccent}</span>
           </h2>
           <div className="title-underline"></div>
-          <p className="section-subtitle">
-            Exploring new skills, participating in workshops, and contributing to the tech community
-          </p>
+          <p className="section-subtitle">{t.experiences.subtitle}</p>
         </div>
 
         {/* Experiences Grid */}
-        <div className="services-grid">
-          {experiences.map((exp, index) => {
-            const isExpanded = expandedId === exp.id;
+        <div className="exp-grid">
+          {t.experiences.items.map((exp, index) => {
+            const isExpanded = expandedId === index;
             return (
               <div
-                key={exp.id}
-                className={`exp-item service-item ${isExpanded ? "expanded" : ""}`}
-                style={{ '--service-color': exp.color, '--delay': `${index * 0.1}s` }}
+                key={index}
+                className={`exp-item ${isExpanded ? "expanded" : ""}`}
+                style={{ '--service-color': expColors[index], '--service-color-rgb': expColorsRgb[index], '--delay': `${index * 0.1}s` }}
               >
                 <div className="service-glow"></div>
                 <div className="service-background"></div>
@@ -131,7 +88,7 @@ function Experiences() {
                 {/* Image Section */}
                 <div className="exp-image-container">
                   <img 
-                    src={exp.image} 
+                    src={expImages[index]} 
                     alt={exp.title}
                     className="exp-image"
                     onError={(e) => {
@@ -140,29 +97,92 @@ function Experiences() {
                     }}
                   />
                   <div className="exp-icon-fallback" style={{ display: 'none' }}>
-                    {exp.icon}
+                    {expIcons[index]}
                   </div>
                   <div className="exp-category-badge">
                     {exp.category}
+                  </div>
+                  <div className="exp-year-badge">
+                    <FaCalendarAlt className="year-icon" />
+                    {years[index]}
                   </div>
                 </div>
 
                 {/* Content Section */}
                 <div className="exp-content">
-                  <h3 className="exp-title">{exp.title}</h3>
+                  <div className="exp-content-header">
+                    <h3 className="exp-title">{exp.title}</h3>
+                    <div className="exp-icon-ring" style={{ color: expColors[index] }}>
+                      {expIcons[index]}
+                    </div>
+                  </div>
+
                   <p className="exp-description">{exp.description}</p>
-                  {isExpanded && <p className="exp-more">{exp.more}</p>}
+
+                  {/* Expandable Content */}
+                  <div className={`exp-expandable ${isExpanded ? "open" : ""}`}>
+                    {/* More Description */}
+                    <div className="exp-more-section">
+                      <div className="exp-section-label">
+                        <FaStar className="section-icon" />
+                        <span>{lang === "km" ? "ព័ត៌មានលម្អិត" : "Details"}</span>
+                      </div>
+                      <p className="exp-more-text">{exp.more}</p>
+                    </div>
+
+                    {/* Skills Learned */}
+                    <div className="exp-skills-section">
+                      <div className="exp-section-label">
+                        <FaLightbulb className="section-icon" />
+                        <span>{lang === "km" ? "ជំនាញដែលបានរៀន" : "Skills Learned"}</span>
+                      </div>
+                      <div className="exp-skills-grid">
+                        {exp.skills && exp.skills.map((skill, i) => (
+                          <span
+                            key={i}
+                            className="exp-skill-tag"
+                            style={{ "--tag-color": expColors[index] }}
+                          >
+                            {skill}
+                          </span>
+                        ))}
+                      </div>
+                    </div>
+
+                    {/* Key Highlights */}
+                    <div className="exp-highlights-section">
+                      <div className="exp-section-label">
+                        <FaTag className="section-icon" />
+                        <span>{lang === "km" ? "ចំណុចសំខាន់ៗ" : "Key Highlights"}</span>
+                      </div>
+                      <ul className="exp-highlights-list">
+                        {exp.highlights && exp.highlights.map((item, i) => (
+                          <li key={i} className="exp-highlight-item">
+                            <span
+                              className="highlight-dot"
+                              style={{ background: expColors[index] }}
+                            ></span>
+                            {item}
+                          </li>
+                        ))}
+                      </ul>
+                    </div>
+                  </div>
+
+                  {/* Toggle Button */}
                   <button
                     type="button"
                     className="exp-toggle-btn"
                     onClick={(e) => {
-                      e.preventDefault();
                       e.stopPropagation();
-                      toggleExpand(exp.id);
+                      toggleExpand(index);
                     }}
                     aria-expanded={isExpanded}
                   >
-                    {isExpanded ? "Show less" : "See more"}
+                    <span>{isExpanded ? t.experiences.showLess : t.experiences.seeMore}</span>
+                    <FaChevronDown
+                      className={`toggle-chevron ${isExpanded ? "rotated" : ""}`}
+                    />
                   </button>
                 </div>
 

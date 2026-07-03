@@ -1,5 +1,18 @@
 import { useEffect, useState } from "react";
-import { FaShieldAlt, FaUsers, FaPalette, FaTrophy, FaBuilding, FaLaptopCode } from "react-icons/fa";
+import {
+  FaShieldAlt,
+  FaUsers,
+  FaPalette,
+  FaTrophy,
+  FaBuilding,
+  FaLaptopCode,
+  FaChevronDown,
+  FaCalendarAlt,
+  FaLightbulb,
+  FaStar,
+  FaTag,
+} from "react-icons/fa";
+import { useLanguage } from "../contexts/LanguageContext";
 import "../css/AdditionallyExperiences.css";
 import cybersecurityImage from "../assets/cybersecurity.png";
 import developYouthImage from "../assets/develop yuth of combodia.png";
@@ -9,6 +22,7 @@ import companyVisitImage from "../assets/R1.png";
 import canvaCoreImage from "../assets/canva core.png";
 
 function AdditionallyExperiences() {
+  const { t, lang } = useLanguage();
   const [expandedId, setExpandedId] = useState(null);
 
   useEffect(() => {
@@ -22,11 +36,10 @@ function AdditionallyExperiences() {
           }
         });
       },
-      { threshold: 0.2 }
+      { threshold: 0.15 }
     );
 
     expItems.forEach((item) => observer.observe(item));
-
     return () => observer.disconnect();
   }, []);
 
@@ -38,76 +51,54 @@ function AdditionallyExperiences() {
     {
       id: 1,
       icon: <FaShieldAlt />,
-      title: "Cybersecurity Awareness Workshop",
-      description: "Learned cybersecurity fundamentals, threat detection, and digital safety practices.",
-      more: "Deep-dived into network security, encryption methods, and incident response protocols through hands-on labs.",
       image: cybersecurityImage,
       color: "#00d4ff",
-      category: "Workshop",
-      level: 95,
-      year: "2026"
+      year: "2026",
+      colorRgb: "0, 212, 255",
     },
     {
       id: 2,
       icon: <FaUsers />,
-      title: "Develop Youth of Cambodia",
-      description: "Contributed to youth tech education and skill development programs.",
-      more: "Mentored students in programming fundamentals, organized coding bootcamps, and built community tech initiatives.",
       image: developYouthImage,
       color: "#ff6b6b",
-      category: "Community",
-      level: 90,
-      year: "2026"
+      year: "2026",
+      colorRgb: "255, 107, 107",
     },
     {
       id: 3,
       icon: <FaPalette />,
-      title: "Figma UI/UX Workshop",
-      description: "Practiced UI/UX design, wireframing, and prototyping using Figma.",
-      more: "Mastered design systems, component libraries, and interactive prototyping for real-world applications.",
       image: figmaWorkshopImage,
       color: "#a855f7",
-      category: "Workshop",
-      level: 88,
-      year: "2026"
+      year: "2026",
+      colorRgb: "168, 85, 247",
     },
     {
       id: 4,
       icon: <FaTrophy />,
-      title: "Innovation Competition",
-      description: "Competed in national-level tech and innovation challenges.",
-      more: "Built and pitched a full-stack solution, collaborating with cross-functional teams under tight deadlines.",
       image: competitionImage,
       color: "#f59e0b",
-      category: "Competition",
-      level: 85,
-      year: "2026"
+      year: "2026",
+      colorRgb: "245, 158, 11",
     },
     {
       id: 5,
       icon: <FaBuilding />,
-      title: "Tech Company Visit",
-      description: "Explored real-world company workflows and engineering environments.",
-      more: "Shadowed senior engineers, attended architecture reviews, and learned CI/CD and agile practices firsthand.",
       image: companyVisitImage,
       color: "#4ecdc4",
-      category: "Industry",
-      level: 80,
-      year: "2026"
+      year: "2026",
+      colorRgb: "78, 205, 196",
     },
     {
       id: 6,
       icon: <FaLaptopCode />,
-      title: "Canva Design Mastery",
-      description: "Created professional graphics and presentation designs using Canva.",
-      more: "Designed brand assets, social media campaigns, and marketing collateral following modern design principles.",
       image: canvaCoreImage,
       color: "#61dafb",
-      category: "Design",
-      level: 92,
-      year: "2026"
-    }
+      year: "2026",
+      colorRgb: "97, 218, 251",
+    },
   ];
+
+  const transItems = t.experiences.items;
 
   return (
     <section className="exp-section" id="experiences">
@@ -115,78 +106,140 @@ function AdditionallyExperiences() {
         {/* Header Section */}
         <div className="exp-header">
           <div className="header-badge">
-            <span className="badge-text">🎯 Additional Experiences</span>
+            <span className="badge-text">{t.experiences.badge}</span>
           </div>
           <h2 className="section-title">
-            <span className="title-main">Beyond</span>
-            <span className="title-accent">Classroom Learning</span>
+            <span className="title-main">{t.experiences.titleMain}</span>
+            <span className="title-accent">{t.experiences.titleAccent}</span>
           </h2>
           <div className="title-underline"></div>
-          <p className="section-subtitle">
-            Workshops, competitions, and real-world activities shaping my journey
-          </p>
+          <p className="section-subtitle">{t.experiences.subtitle}</p>
         </div>
 
         {/* Experiences Grid */}
         <div className="exp-grid">
           {experiences.map((exp, index) => {
             const isExpanded = expandedId === exp.id;
+            const trans = transItems[index] || {};
+            const tSeeMore = t.experiences.seeMore;
+            const tShowLess = t.experiences.showLess;
+
             return (
               <div
                 key={exp.id}
                 className={`exp-item ${isExpanded ? "expanded" : ""}`}
-                style={{ '--service-color': exp.color, '--delay': `${index * 0.1}s` }}
+                style={{ "--service-color": exp.color, "--service-color-rgb": exp.colorRgb, "--delay": `${index * 0.1}s` }}
+                onClick={() => toggleExpand(exp.id)}
+                role="button"
+                tabIndex={0}
+                onKeyDown={(e) => {
+                  if (e.key === "Enter" || e.key === " ") {
+                    e.preventDefault();
+                    toggleExpand(exp.id);
+                  }
+                }}
               >
                 <div className="service-glow"></div>
                 <div className="service-background"></div>
-                
+
                 {/* Image Section */}
                 <div className="exp-image-container">
-                  <img 
-                    src={exp.image} 
-                    alt={exp.title}
+                  <img
+                    src={exp.image}
+                    alt={trans.title}
                     className="exp-image"
                     onError={(e) => {
-                      e.target.style.display = 'none';
-                      e.target.nextElementSibling.style.display = 'flex';
+                      e.target.style.display = "none";
+                      e.target.nextElementSibling.style.display = "flex";
                     }}
                   />
-                  <div className="exp-icon-fallback" style={{ display: 'none' }}>
+                  <div className="exp-icon-fallback" style={{ display: "none" }}>
                     {exp.icon}
                   </div>
                   <div className="exp-category-badge">
-                    {exp.category}
+                    {trans.category}
+                  </div>
+                  <div className="exp-year-badge">
+                    <FaCalendarAlt className="year-icon" />
+                    {exp.year}
                   </div>
                 </div>
 
                 {/* Content Section */}
                 <div className="exp-content">
-                  <h3 className="exp-title">{exp.title}</h3>
-                  <p className="exp-description">{exp.description}</p>
-                  {isExpanded && <p className="exp-more">{exp.more}</p>}
-                  
-                  {/* Progress Bar */}
-                  <div className="progress-container">
-                    <div className="progress-bar">
-                      <div 
-                        className="progress-fill" 
-                        style={{ width: `${exp.level}%` }}
-                      ></div>
+                  <div className="exp-content-header">
+                    <h3 className="exp-title">{trans.title}</h3>
+                    <div className="exp-icon-ring" style={{ color: exp.color }}>
+                      {exp.icon}
                     </div>
-                    <span className="progress-text">{exp.level}%</span>
                   </div>
 
+                  <p className="exp-description">{trans.description}</p>
+
+                  {/* Expandable Content */}
+                  <div className={`exp-expandable ${isExpanded ? "open" : ""}`}>
+                      {/* More Description */}
+                      <div className="exp-more-section">
+                        <div className="exp-section-label">
+                          <FaStar className="section-icon" />
+                          <span>{lang === "km" ? "ព័ត៌មានលម្អិត" : "Details"}</span>
+                        </div>
+                        <p className="exp-more-text">{trans.more}</p>
+                      </div>
+
+                      {/* Skills Learned */}
+                      <div className="exp-skills-section">
+                        <div className="exp-section-label">
+                          <FaLightbulb className="section-icon" />
+                          <span>{lang === "km" ? "ជំនាញដែលបានរៀន" : "Skills Learned"}</span>
+                        </div>
+                        <div className="exp-skills-grid">
+                          {trans.skills && trans.skills.map((skill, i) => (
+                            <span
+                              key={i}
+                              className="exp-skill-tag"
+                              style={{ "--tag-color": exp.color }}
+                            >
+                              {skill}
+                            </span>
+                          ))}
+                        </div>
+                      </div>
+
+                      {/* Key Highlights */}
+                      <div className="exp-highlights-section">
+                        <div className="exp-section-label">
+                          <FaTag className="section-icon" />
+                          <span>{lang === "km" ? "ចំណុចសំខាន់ៗ" : "Key Highlights"}</span>
+                        </div>
+                        <ul className="exp-highlights-list">
+                          {trans.highlights && trans.highlights.map((item, i) => (
+                            <li key={i} className="exp-highlight-item">
+                              <span
+                                className="highlight-dot"
+                                style={{ background: exp.color }}
+                              ></span>
+                              {item}
+                            </li>
+                          ))}
+                        </ul>
+                      </div>
+                  </div>
+
+                  {/* Toggle Button */}
                   <button
                     type="button"
                     className="exp-toggle-btn"
                     onClick={(e) => {
-                      e.preventDefault();
                       e.stopPropagation();
                       toggleExpand(exp.id);
                     }}
                     aria-expanded={isExpanded}
                   >
-                    {isExpanded ? "Show less" : "See more"}
+                    <span>{isExpanded ? tShowLess : tSeeMore}</span>
+                    <FaChevronDown
+                      className={`toggle-chevron ${isExpanded ? "rotated" : ""}`}
+                    />
                   </button>
                 </div>
 

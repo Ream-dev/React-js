@@ -1,4 +1,4 @@
-import { useEffect, useMemo, useState } from "react";
+import { useEffect, useMemo, useRef, useState } from "react";
 import {
   FaHome,
   FaUser,
@@ -9,12 +9,18 @@ import {
   FaSun,
   FaBars,
   FaTimes,
-  FaCode
+  FaCode,
+  FaChevronDown,
+  FaCheck
 } from "react-icons/fa";
 
 import "../css/Nabar.css";
+import { useLanguage } from "../contexts/LanguageContext";
+import flagCambodia from "../assets/flag-cambodia.svg";
+import flagUk from "../assets/flag-uk.png";
 
 function Navbar() {
+  const { lang, setLang, toggleLang, t } = useLanguage();
   const [isDark, setIsDark] = useState(true);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
@@ -22,12 +28,12 @@ function Navbar() {
 
   const navItems = useMemo(
     () => [
-      { href: "#home", label: "Home", icon: <FaHome /> },
-      { href: "#about", label: "About", icon: <FaUser /> },
-      { href: "#Experiences", label: "Experiences", icon: <FaLaptopCode /> },
-      { href: "#projects", label: "Projects", icon: <FaFolderOpen /> }
+      { href: "#home", label: t.nav.home, icon: <FaHome /> },
+      { href: "#about", label: t.nav.about, icon: <FaUser /> },
+      { href: "#Experiences", label: t.nav.experiences, icon: <FaLaptopCode /> },
+      { href: "#projects", label: t.nav.projects, icon: <FaFolderOpen /> }
     ],
-    []
+    [t]
   );
 
   useEffect(() => {
@@ -70,8 +76,8 @@ function Navbar() {
         {/* Logo */}
         <a href="#home" className="logo" onClick={() => setIsMobileMenuOpen(false)}>
           <span className="logo-icon"><FaCode /></span>
-          <span className="logo-text">Ream</span>
-          <span className="logo-accent">Khorn</span>
+          <span className="logo-text">{t.nav.logoFirst}</span>
+          <span className="logo-accent">{t.nav.logoLast}</span>
         </a>
 
         {/* Desktop Navigation */}
@@ -96,10 +102,16 @@ function Navbar() {
             onClick={toggleTheme}
           >
             {isDark ? <FaMoon /> : <FaSun />}
-          </button>
+          </button>          {/* Language Dropdown Selector */}
+          <LanguageDropdown
+            lang={lang}
+            setLang={setLang}
+            flagCambodia={flagCambodia}
+            flagUk={flagUk}
+          />
 
           <a href="#contact" className="btn-nav" onClick={() => setIsMobileMenuOpen(false)}>
-            <FaEnvelope /> Contact
+            <FaEnvelope /> <span>{t.nav.contact}</span>
           </a>
 
           <button
@@ -112,19 +124,117 @@ function Navbar() {
         </div>
       </div>
 
+      {/* Mobile Menu Backdrop */}
+      {isMobileMenuOpen && (
+        <div className="mobile-backdrop" onClick={() => setIsMobileMenuOpen(false)}></div>
+      )}
+
       {/* Mobile Menu */}
       <div className={`mobile-menu ${isMobileMenuOpen ? "open" : ""}`}>
-        {navItems.map((item) => (
+        <div className="mobile-menu-header">
+          <span className="mobile-menu-title">{t.nav.logoFirst} {t.nav.logoLast}</span>
+          <button className="mobile-close-btn" onClick={() => setIsMobileMenuOpen(false)} aria-label="Close menu">
+            <FaTimes />
+          </button>
+        </div>
+        {navItems.map((item, i) => (
           <a
             key={item.href}
             href={item.href}
+            className="mobile-nav-link"
+            style={{ animationDelay: `${i * 0.08}s` }}
             onClick={() => handleNavClick(item.href)}
           >
-            {item.icon} {item.label}
+            <span className="mobile-link-icon">{item.icon}</span>
+            <span className="mobile-link-label">{item.label}</span>
           </a>
         ))}
+
+        {/* Contact Button at bottom of mobile menu */}
+        <div className="mobile-menu-footer">
+          <a
+            href="#contact"
+            className="mobile-contact-btn"
+            onClick={() => handleNavClick("#contact")}
+          >
+            <FaEnvelope /> <span>{t.nav.contact}</span>
+          </a>
+        </div>
       </div>
     </nav>
+  );
+}
+
+/* ===== Language Dropdown Component ===== */
+function LanguageDropdown({ lang, setLang, flagCambodia, flagUk }) {
+  const [open, setOpen] = useState(false);
+  const ref = useRef(null);
+
+  useEffect(() => {
+    const handleClickOutside = (e) => {
+      if (ref.current && !ref.current.contains(e.target)) {
+        setOpen(false);
+      }
+    };
+    document.addEventListener("mousedown", handleClickOutside);
+    return () => document.removeEventListener("mousedown", handleClickOutside);
+  }, []);
+
+  const options = [
+    {
+      code: "km",
+      flag: flagCambodia,
+      label: "ភាសាខ្មែរ",
+      sub: "Khmer",
+    },
+    {
+      code: "en",
+      flag: flagUk,
+      label: "English",
+      sub: "អង់គ្លេស",
+    },
+  ];
+
+  const current = options.find((o) => o.code === lang);
+
+  return (
+    <div className="lang-dropdown" ref={ref}>
+      <button
+        className="lang-selector-btn"
+        onClick={() => setOpen((prev) => !prev)}
+        aria-haspopup="listbox"
+        aria-expanded={open}
+        aria-label="Select language"
+      >
+        <img src={current.flag} alt={current.label} className="flag-img" />
+        <FaChevronDown className={`chevron ${open ? "open" : ""}`} />
+      </button>
+
+      <div className={`lang-menu ${open ? "open" : ""}`} role="listbox">
+        {options.map((opt) => {
+          const isActive = lang === opt.code;
+          return (
+            <button
+              key={opt.code}
+              className={`lang-option ${isActive ? "active" : ""}`}
+              onClick={() => {
+                if (!isActive) setLang(opt.code);
+                setOpen(false);
+              }}
+              role="option"
+              aria-selected={isActive}
+            >
+              <img src={opt.flag} alt={opt.label} className="flag-img" />
+              <span className="lang-option-text">
+                <span className="lang-name">{opt.label}</span>
+                <span className="lang-sub">{opt.sub}</span>
+              </span>
+              {isActive && <FaCheck className="lang-check" />}
+            </button>
+          );
+        })}
+      </div>
+    </div>
   );
 }
 

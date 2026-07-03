@@ -329,14 +329,30 @@
 
 .form-header {
   margin-bottom: 8px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+}
+
+.form-header-icon {
+  width: 56px;
+  height: 56px;
+  border-radius: 18px;
+  background: linear-gradient(135deg, #6366f1, #8b5cf6);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.4rem;
+  color: white;
+  margin-bottom: 16px;
+  box-shadow: 0 8px 24px rgba(99, 102, 241, 0.3);
 }
 
 .form-title {
-  font-size: 0.95rem;
+  font-size: 1.1rem;
   font-weight: 700;
-  text-transform: uppercase;
-  letter-spacing: 0.18em;
-  color: #8b9ac6;
+  color: #ffffff;
   margin: 0 0 6px;
 }
 
@@ -368,16 +384,41 @@
   text-transform: uppercase;
   letter-spacing: 0.08em;
   color: #9ca3af;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.form-label-icon {
+  font-size: 0.7rem;
+  opacity: 0.6;
 }
 
 .input-wrapper {
   position: relative;
 }
 
+.input-field-icon {
+  position: absolute;
+  left: 16px;
+  top: 50%;
+  transform: translateY(-50%);
+  color: #64748b;
+  font-size: 0.9rem;
+  z-index: 2;
+  pointer-events: none;
+  transition: color 0.25s ease;
+}
+
+.input-textarea-icon {
+  top: 20px;
+  transform: none;
+}
+
 .contact-form input,
 .contact-form textarea {
   width: 100%;
-  padding: 16px 18px;
+  padding: 16px 18px 16px 44px;
   border: 1px solid rgba(255, 255, 255, 0.08);
   border-radius: 18px;
   background: rgba(7, 13, 24, 0.9);
@@ -399,6 +440,10 @@
   border-color: rgba(99, 102, 241, 0.5);
   background: rgba(7, 13, 24, 0.98);
   box-shadow: 0 0 0 3px rgba(99, 102, 241, 0.1);
+}
+
+.input-wrapper:focus-within .input-field-icon {
+  color: #818cf8;
 }
 
 .contact-form textarea {
@@ -467,6 +512,109 @@
 
 .form-submit:hover .submit-glow {
   left: 100%;
+}
+
+/* Direct Email Button */
+.direct-email-btn {
+  position: relative;
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  width: 100%;
+  padding: 18px 20px;
+  background: rgba(99, 102, 241, 0.08);
+  border: 1px solid rgba(99, 102, 241, 0.25);
+  border-radius: 20px;
+  cursor: pointer;
+  transition: all 0.35s ease;
+  overflow: hidden;
+  text-align: left;
+  margin-top: 8px;
+}
+
+.direct-email-btn:hover {
+  transform: translateY(-3px);
+  border-color: rgba(99, 102, 241, 0.5);
+  box-shadow: 0 16px 40px rgba(99, 102, 241, 0.2);
+  background: rgba(99, 102, 241, 0.12);
+}
+
+.direct-email-icon {
+  width: 48px;
+  height: 48px;
+  border-radius: 14px;
+  background: linear-gradient(135deg, #6366f1, #8b5cf6);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: white;
+  font-size: 1.2rem;
+  flex-shrink: 0;
+  box-shadow: 0 8px 20px rgba(99, 102, 241, 0.3);
+  position: relative;
+  z-index: 2;
+  transition: transform 0.3s ease;
+}
+
+.direct-email-btn:hover .direct-email-icon {
+  transform: scale(1.08) rotate(-5deg);
+}
+
+.direct-email-text {
+  flex: 1;
+  position: relative;
+  z-index: 2;
+}
+
+.direct-email-label {
+  display: block;
+  font-size: 0.8rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  color: #8b9ac6;
+  margin-bottom: 4px;
+}
+
+.direct-email-value {
+  display: block;
+  font-size: 0.9rem;
+  color: #e2e8f0;
+  font-weight: 500;
+  transition: color 0.3s ease;
+}
+
+.direct-email-btn:hover .direct-email-value {
+  color: #a5b4fc;
+}
+
+.direct-email-arrow {
+  font-size: 1.1rem;
+  color: #6366f1;
+  position: relative;
+  z-index: 2;
+  transition: transform 0.3s ease;
+}
+
+.direct-email-btn:hover .direct-email-arrow {
+  transform: translateX(4px);
+}
+
+.direct-email-glow {
+  position: absolute;
+  top: -50%;
+  left: -50%;
+  width: 200%;
+  height: 200%;
+  background: radial-gradient(circle, rgba(99, 102, 241, 0.15), transparent 60%);
+  opacity: 0;
+  transition: opacity 0.4s ease;
+  filter: blur(40px);
+  pointer-events: none;
+}
+
+.direct-email-btn:hover .direct-email-glow {
+  opacity: 1;
 }
 
 /* Form Status */
@@ -741,6 +889,19 @@ body.light-mode .contact-form textarea:focus {
   background: #ffffff;
 }
 
+body.light-mode .form-header-icon {
+  background: linear-gradient(135deg, #0b8bff, #3cc6ff);
+  box-shadow: 0 8px 24px rgba(11, 139, 255, 0.2);
+}
+
+body.light-mode .input-field-icon {
+  color: #94a3b8;
+}
+
+body.light-mode .input-wrapper:focus-within .input-field-icon {
+  color: #0b8bff;
+}
+
 body.light-mode .form-submit {
   background: linear-gradient(135deg, #0b8bff, #3cc6ff);
   box-shadow: 0 4px 14px rgba(11, 139, 255, 0.25);
@@ -748,6 +909,38 @@ body.light-mode .form-submit {
 
 body.light-mode .form-submit:hover {
   box-shadow: 0 8px 25px rgba(11, 139, 255, 0.3);
+}
+
+body.light-mode .direct-email-btn {
+  background: rgba(11, 139, 255, 0.06);
+  border-color: rgba(11, 139, 255, 0.18);
+}
+
+body.light-mode .direct-email-btn:hover {
+  background: rgba(11, 139, 255, 0.1);
+  border-color: rgba(11, 139, 255, 0.35);
+  box-shadow: 0 16px 40px rgba(11, 139, 255, 0.12);
+}
+
+body.light-mode .direct-email-icon {
+  background: linear-gradient(135deg, #0b8bff, #3cc6ff);
+  box-shadow: 0 8px 20px rgba(11, 139, 255, 0.2);
+}
+
+body.light-mode .direct-email-label {
+  color: #64748b;
+}
+
+body.light-mode .direct-email-value {
+  color: #0e1726;
+}
+
+body.light-mode .direct-email-btn:hover .direct-email-value {
+  color: #0b8bff;
+}
+
+body.light-mode .direct-email-arrow {
+  color: #0b8bff;
 }
 
 body.light-mode .form-status.success {

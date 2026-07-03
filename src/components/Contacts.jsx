@@ -1,8 +1,10 @@
 import { useState, useEffect, useRef } from "react";
 import "../css/Contact.css";
-import { FaEnvelope, FaPhone, FaLinkedin, FaGithub, FaCheckCircle, FaPaperPlane } from "react-icons/fa";
+import { FaEnvelope, FaPhone, FaLinkedin, FaGithub, FaCheckCircle, FaPaperPlane, FaUser, FaCommentAlt, FaArrowRight } from "react-icons/fa";
+import { useLanguage } from "../contexts/LanguageContext";
 
 function Contact() {
+  const { t, lang } = useLanguage();
   const [formData, setFormData] = useState({
     name: "",
     email: "",
@@ -58,31 +60,35 @@ function Contact() {
     const message = sanitize(formData.message);
 
     if (!name || !email || !message) {
-      setStatus("Please fill in all fields.");
+      setStatus(t.contacts.errors.fillAll);
       setStatusType("error");
       return;
     }
     if (name.length < 2) {
-      setStatus("Name must be at least 2 characters.");
+      setStatus(t.contacts.errors.nameShort);
       setStatusType("error");
       return;
     }
     if (!isValidEmail(email)) {
-      setStatus("Please enter a valid email address.");
+      setStatus(t.contacts.errors.invalidEmail);
       setStatusType("error");
       return;
     }
     if (message.length < 10) {
-      setStatus("Message must be at least 10 characters.");
+      setStatus(t.contacts.errors.messageShort);
       setStatusType("error");
       return;
     }
 
-    setStatus("Opening your email client...");
+    setStatus(t.contacts.errors.opening);
     setStatusType("success");
 
     const mailtoLink = `mailto:reamkhorn12345@gmail.com?subject=Portfolio Contact from ${encodeURIComponent(name)}&body=${encodeURIComponent(`Name: ${name}\nEmail: ${email}\n\nMessage:\n${message}`)}`;
     window.location.href = mailtoLink;
+  };
+
+  const openEmailDirect = () => {
+    window.location.href = "mailto:reamkhorn12345@gmail.com";
   };
 
   const copyToClipboard = (text) => {
@@ -143,39 +149,37 @@ function Contact() {
         {/* Header */}
         <div className="contact-header">
           <div className="header-badge">
-            <span className="badge-text">📬 Get In Touch</span>
+            <span className="badge-text">{t.contacts.badge}</span>
           </div>
           <h2 className="section-title">
-            <span className="title-main">Let's</span>
-            <span className="title-accent">Collaborate</span>
+            <span className="title-main">{t.contacts.titleMain}</span>
+            <span className="title-accent">{t.contacts.titleAccent}</span>
           </h2>
           <div className="title-underline"></div>
-          <p className="section-subtitle">
-            Have a project in mind? I'm always open to discussing new opportunities and ideas.
-          </p>
+          <p className="section-subtitle">{t.contacts.subtitle}</p>
         </div>
 
         {/* Main Content Grid */}
         <div className="contact-grid">
           {/* Contact Info Cards */}
           <div className="contact-info" ref={(el) => (itemsRef.current[0] = el)}>
-            <h3 className="contact-subtitle">Contact Info</h3>
+            <h3 className="contact-subtitle">{t.contacts.infoTitle}</h3>
             <div className="info-grid">
-              {contacts.map((c, i) => {
-                const isExpanded = expandedContact === c.id;
-                const isExternal = c.href && c.href.startsWith("http");
+              {t.contacts.contacts.map((c, i) => {
+                const isExpanded = expandedContact === i;
+                const isExternal = contacts[i].href && contacts[i].href.startsWith("http");
                 return (
                   <a
-                    key={c.id}
-                    href={c.href}
+                    key={i}
+                    href={contacts[i].href}
                     target={isExternal ? "_blank" : undefined}
                     rel={isExternal ? "noopener noreferrer" : undefined}
                     className={`info-card ${isExpanded ? "expanded" : ""}`}
-                    style={{ '--contact-color': c.color, '--delay': `${i * 0.1}s` }}
+                    style={{ '--contact-color': contacts[i].color, '--delay': `${i * 0.1}s` }}
                     onClick={(e) => {
-                      if (c.copy) {
+                      if (contacts[i].copy) {
                         e.preventDefault();
-                        copyToClipboard(c.copy);
+                        copyToClipboard(contacts[i].copy);
                       }
                     }}
                     ref={(el) => (itemsRef.current[i + 1] = el)}
@@ -183,7 +187,7 @@ function Contact() {
                     <div className="info-glow"></div>
                     <div className="info-background"></div>
                     <div className="info-icon">
-                      {c.icon}
+                      {contacts[i].icon}
                     </div>
                     <div className="info-details">
                       <div className="info-header">
@@ -197,11 +201,11 @@ function Contact() {
                           onClick={(ev) => {
                             ev.preventDefault();
                             ev.stopPropagation();
-                            toggleContact(c.id);
+                            toggleContact(i);
                           }}
                           aria-expanded={isExpanded}
                         >
-                          {isExpanded ? "Hide" : "Show"}
+                          {isExpanded ? t.contacts.hide : t.contacts.show}
                         </button>
                       </div>
                       {isExpanded && c.more && <div className="info-more">{c.more}</div>}
@@ -210,6 +214,19 @@ function Contact() {
                   </a>
                 );
               })}
+
+              {/* Direct Email Button */}
+              <button className="direct-email-btn" onClick={openEmailDirect}>
+                <div className="direct-email-icon">
+                  <FaEnvelope />
+                </div>
+                <div className="direct-email-text">
+                  <span className="direct-email-label">{lang === "km" ? "ផ្ញើអ៊ីមែលផ្ទាល់" : "Send Direct Email"}</span>
+                  <span className="direct-email-value">reamkhorn12345@gmail.com</span>
+                </div>
+                <FaArrowRight className="direct-email-arrow" />
+                <div className="direct-email-glow"></div>
+              </button>
             </div>
           </div>
 
@@ -217,18 +234,24 @@ function Contact() {
           <div className="contact-form-wrapper" ref={(el) => (itemsRef.current[itemsRef.current.length] = el)}>
             <form className="contact-form" onSubmit={handleSubmit}>
               <div className="form-header">
-                <h3 className="form-title">Send a Message</h3>
-                <p className="form-subtitle">I'll get back to you as soon as possible</p>
+                <div className="form-header-icon">
+                  <FaEnvelope />
+                </div>
+                <h3 className="form-title">{t.contacts.formTitle}</h3>
+                <p className="form-subtitle">{t.contacts.formSubtitle}</p>
               </div>
               <div className="form-grid">
                 <div className="form-group">
-                  <label htmlFor="name" className="form-label">Your Name</label>
+                  <label htmlFor="name" className="form-label">
+                    <FaUser className="form-label-icon" /> {t.contacts.nameLabel}
+                  </label>
                   <div className="input-wrapper">
+                    <FaUser className="input-field-icon" />
                     <input
                       type="text"
                       id="name"
                       name="name"
-                      placeholder="John Doe"
+                      placeholder={t.contacts.namePlaceholder}
                       value={formData.name}
                       onChange={handleChange}
                       required
@@ -237,13 +260,16 @@ function Contact() {
                   </div>
                 </div>
                 <div className="form-group">
-                  <label htmlFor="email" className="form-label">Your Email</label>
+                  <label htmlFor="email" className="form-label">
+                    <FaEnvelope className="form-label-icon" /> {t.contacts.emailLabel}
+                  </label>
                   <div className="input-wrapper">
+                    <FaEnvelope className="input-field-icon" />
                     <input
                       type="email"
                       id="email"
                       name="email"
-                      placeholder="john@example.com"
+                      placeholder={t.contacts.emailPlaceholder}
                       value={formData.email}
                       onChange={handleChange}
                       required
@@ -252,12 +278,15 @@ function Contact() {
                   </div>
                 </div>
                 <div className="form-group full-width">
-                  <label htmlFor="message" className="form-label">Message</label>
+                  <label htmlFor="message" className="form-label">
+                    <FaCommentAlt className="form-label-icon" /> {t.contacts.messageLabel}
+                  </label>
                   <div className="input-wrapper">
+                    <FaCommentAlt className="input-field-icon input-textarea-icon" />
                     <textarea
                       id="message"
                       name="message"
-                      placeholder="Tell me about your project..."
+                      placeholder={t.contacts.messagePlaceholder}
                       rows="5"
                       value={formData.message}
                       onChange={handleChange}
@@ -268,7 +297,7 @@ function Contact() {
                 </div>
               </div>
               <button type="submit" className="form-submit">
-                <FaPaperPlane /> Send Message
+                <FaPaperPlane /> {t.contacts.sendBtn}
                 <span className="submit-glow"></span>
               </button>
               {status && (

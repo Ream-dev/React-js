@@ -3,14 +3,11 @@ import { FaGithub, FaLinkedin, FaEnvelope, FaChevronDown, FaReact, FaNodeJs, FaH
 import profile from "../assets/ream.png";
 import { SiTypescript } from "react-icons/si";
 import "../css/Headers.css";
+import { useLanguage } from "../contexts/LanguageContext";
 
 function Headers() {
-  const roles = [
-    "Modern Full Stack Developer",
-    "React & Node.js Specialist",
-    "UI/UX-Focused Engineer",
-    "Database Creator"
-  ];
+  const { t } = useLanguage();
+  const roles = t.hero.roles;
 
   const [text, setText] = useState("");
   const [index, setIndex] = useState(0);
@@ -37,8 +34,8 @@ function Headers() {
     <header className="hero">
       {/* Background Name */}
       <div className="hero-bg-text">
-        <span className="bg-name-first">REAM</span>
-        <span className="bg-name-last">KHORN</span>
+        <span className="bg-name-first">{t.hero.bgFirstName}</span>
+        <span className="bg-name-last">{t.hero.bgLastName}</span>
       </div>
       
       <div className="hero-container">
@@ -46,11 +43,11 @@ function Headers() {
         {/* LEFT SIDE */}
         <div className="hero-left">
           <div className="greeting-badge">
-            <span className="wave">👋</span> Hello, I'm
+            <span className="wave">👋</span> {t.hero.greeting}
           </div>
 
           <h1>
-            <span>Ream</span> Khorn
+            <span>{t.hero.nameFirst}</span> {t.hero.nameLast}
           </h1>
 
           <h2>
@@ -58,33 +55,23 @@ function Headers() {
             <span className="cursor">|</span>
           </h2>
 
-          <p>
-            Before: simple websites. Now: modern digital products with polished UI, 
-            fast performance, and scalable architecture. I build web experiences 
-            that feel fresh, functional, and ready for today — designed to impress hiring teams and support product growth.
-          </p>
+          <p>{t.hero.description}</p>
 
           <div className="hero-stats">
-            <div className="stat-box">
-              <span className="stat-number">2+</span>
-              <span className="stat-label">Years</span>
-            </div>
-            <div className="stat-box">
-              <span className="stat-number">15+</span>
-              <span className="stat-label">Projects</span>
-            </div>
-            <div className="stat-box">
-              <span className="stat-number">100%</span>
-              <span className="stat-label">Dedicated</span>
-            </div>
+            {t.hero.stats.map((stat, i) => (
+              <div className="stat-box" key={i}>
+                <span className="stat-number">{stat.number}</span>
+                <span className="stat-label">{stat.label}</span>
+              </div>
+            ))}
           </div>
 
           <div className="hero-buttons">
             <a href="#projects" className="btn primary">
-              View My Work
+              {t.hero.viewWork}
             </a>
             <a href="#contact" className="btn outline">
-              Contact Me
+              {t.hero.contactMe}
             </a>
           </div>
 
@@ -112,12 +99,12 @@ function Headers() {
               </div>
             </div>
             <div className="profile-info">
-              <h3>Ream</h3>
-              <p className="profile-role">Full-Stack Developer</p>
-              <p className="profile-location">Cambodia</p>
+              <h3>{t.hero.nameFirst}</h3>
+              <p className="profile-role">{t.hero.profileRole}</p>
+              <p className="profile-location">{t.hero.profileLocation}</p>
               <span className="availability-badge">
                 <span className="pulse-dot"></span>
-                Available for Work
+                {t.hero.available}
               </span>
               <div className="tech-stack-row">
                 <span className="tech-pill"><FaReact /> React</span>

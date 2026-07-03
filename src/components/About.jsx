@@ -1,7 +1,9 @@
 import "../css/About.css";
-import { FaReact, FaCode, FaLaptopCode, FaGraduationCap, FaNodeJs, FaDatabase, FaGitAlt, FaCloud, FaMobileAlt, FaPalette, FaChartLine, FaAward, FaRocket, FaGithub, FaLanguage, FaCertificate, FaHtml5, FaCss3Alt, FaJsSquare, FaPython, FaDocker, FaAws, FaFigma, FaServer, FaTools, FaStar, FaTrophy, FaBriefcase, FaCalendarAlt, FaWordpress, FaPhp, FaVuejs } from "react-icons/fa";
+import { FaReact, FaCode, FaLaptopCode, FaGraduationCap, FaNodeJs, FaDatabase, FaGitAlt, FaCloud, FaMobileAlt, FaPalette, FaChartLine, FaAward, FaRocket, FaGithub, FaLanguage, FaCertificate, FaHtml5, FaCss3Alt, FaJsSquare, FaPython, FaDocker, FaAws, FaFigma, FaServer, FaTools, FaStar, FaTrophy, FaBriefcase, FaCalendarAlt, FaWordpress, FaPhp, FaVuejs, FaHeadset } from "react-icons/fa";
+import { useLanguage } from "../contexts/LanguageContext";
 
 function About() {
+  const { t, lang } = useLanguage();
 
   return (
     <section className="about-section" id="about">
@@ -17,8 +19,11 @@ function About() {
 
       <div className="about-container">
         <div className="about-header">
-          <h2 className="section-heading">About Me</h2>
-          <p className="section-subheading">Education, skills, and journey</p>
+          <h2 className="section-heading">{t.about.heading}</h2>
+          <p className="section-subheading">{t.about.subheading}</p>
+          {lang === "km" && (
+            <p className="khmer-intro">{t.about.khmerIntro}</p>
+          )}
         </div>
 
         <div className="details-section">
@@ -30,28 +35,22 @@ function About() {
                   <FaGraduationCap />
                 </div>
                 <div className="card-title">
-                  <h3>Education</h3>
-                  <p>Professional Training</p>
+                  <h3>{t.about.education}</h3>
+                  <p>{t.about.educationSub}</p>
                 </div>
               </div>
               <div className="card-content">
                 <div className="edu-item">
-                  <h4>Passerelles Numériques Cambodia</h4>
-                  <span className="edu-period">2026 - Present</span>
-                  <div className="edu-status active">Currently Enrolled</div>
-                  <p>
-                    Bachelor's Degree in Full-Stack Web Development program with comprehensive 
-                    curriculum covering modern technologies and real-world projects.
-                  </p>
+                  <h4>{t.about.edu1Title}</h4>
+                  <span className="edu-period">{t.about.edu1Period}</span>
+                  <div className="edu-status active">{t.about.edu1Status}</div>
+                  <p>{t.about.edu1Desc}</p>
                 </div>
                 <div className="edu-item">
-                  <h4>High School Diploma</h4>
-                  <span className="edu-period">2021 - 2024</span>
-                  <div className="edu-status graduated">Graduated 2024</div>
-                  <p>
-                    Completed high school with strong results in science, mathematics, and digital 
-                    literacy, building a foundation for modern web development and technology studies.
-                  </p>
+                  <h4>{t.about.edu2Title}</h4>
+                  <span className="edu-period">{t.about.edu2Period}</span>
+                  <div className="edu-status graduated">{t.about.edu2Status}</div>
+                  <p>{t.about.edu2Desc}</p>
                 </div>
               </div>
             </div>
@@ -63,31 +62,100 @@ function About() {
                   <FaCode />
                 </div>
                 <div className="card-title">
-                  <h3>Languages & Technologies</h3>
-                  <p>What I've Learned</p>
+                  <h3>{t.about.languages}</h3>
+                  <p>{t.about.languagesSub}</p>
                 </div>
               </div>
               <div className="card-content">
-                <div className="languages-grid">
-                  <div className="lang-item"><FaVuejs className="lang-icon vue" /><span>Vue.js</span></div>
-                  <div className="lang-item"><FaJsSquare className="lang-icon ts" /><span>TypeScript</span></div>
-                  <div className="lang-item"><FaPhp className="lang-icon php" /><span>PHP</span></div>
-                  <div className="lang-item"><FaNodeJs className="lang-icon node" /><span>Node.js</span></div>
-                  <div className="lang-item"><FaDatabase className="lang-icon mongo" /><span>MongoDB</span></div>
-                  <div className="lang-item"><FaDatabase className="lang-icon sql" /><span>SQL</span></div>
-                  <div className="lang-item"><FaAws className="lang-icon aws" /><span>AWS</span></div>
-                  <div className="lang-item"><FaJsSquare className="lang-icon js" /><span>JavaScript</span></div>
-                  <div className="lang-item"><FaHtml5 className="lang-icon html" /><span>HTML</span></div>
-                  <div className="lang-item"><FaCss3Alt className="lang-icon css" /><span>CSS</span></div>
-                  <div className="lang-item"><FaPython className="lang-icon python" /><span>Python</span></div>
-                  <div className="lang-item"><FaPhp className="lang-icon laravel" /><span>Laravel</span></div>
-                  <div className="lang-item"><FaWordpress className="lang-icon wp" /><span>WordPress</span></div>
-                  <div className="lang-item"><FaFigma className="lang-icon figma" /><span>Figma</span></div>
-                  <div className="lang-item"><FaServer className="lang-icon vercel" /><span>Vercel</span></div>
-                  <div className="lang-item"><FaChartLine className="lang-icon data" /><span>Data Analysis</span></div>
-                  <div className="lang-item"><FaGithub className="lang-icon github" /><span>GitHub</span></div>
-                  <div className="lang-item"><FaGitAlt className="lang-icon git" /><span>Git</span></div>
-                  <div className="lang-item"><FaServer className="lang-icon laragon" /><span>Laragon</span></div>
+                {/* Category Marquee Rows */}
+                <div className="lang-categories">
+                  {/* Frontend Row - scrolls left to right */}
+                  <div className="lang-category">
+                    <div className="lang-category-label frontend-label">
+                      <FaPalette className="cat-icon" />
+                      <span>Frontend</span>
+                    </div>
+                    <div className="lang-marquee-wrapper">
+                      <div className="lang-marquee-track reverse">
+                        <div className="lang-marquee-content">
+                          <div className="lang-marquee-item frontend-item"><FaVuejs className="lang-icon vue" /><span>Vue.js</span></div>
+                          <div className="lang-marquee-item frontend-item"><FaJsSquare className="lang-icon ts" /><span>TypeScript</span></div>
+                          <div className="lang-marquee-item frontend-item"><FaJsSquare className="lang-icon js" /><span>JavaScript</span></div>
+                          <div className="lang-marquee-item frontend-item"><FaHtml5 className="lang-icon html" /><span>HTML</span></div>
+                          <div className="lang-marquee-item frontend-item"><FaCss3Alt className="lang-icon css" /><span>CSS</span></div>
+                          <div className="lang-marquee-item frontend-item"><FaFigma className="lang-icon figma" /><span>Figma</span></div>
+                          <div className="lang-marquee-item frontend-item"><FaWordpress className="lang-icon wp" /><span>WordPress</span></div>
+                        </div>
+                        <div className="lang-marquee-content frontend-items" aria-hidden="true">
+                          <div className="lang-marquee-item frontend-item"><FaVuejs className="lang-icon vue" /><span>Vue.js</span></div>
+                          <div className="lang-marquee-item frontend-item"><FaJsSquare className="lang-icon ts" /><span>TypeScript</span></div>
+                          <div className="lang-marquee-item frontend-item"><FaJsSquare className="lang-icon js" /><span>JavaScript</span></div>
+                          <div className="lang-marquee-item frontend-item"><FaHtml5 className="lang-icon html" /><span>HTML</span></div>
+                          <div className="lang-marquee-item frontend-item"><FaCss3Alt className="lang-icon css" /><span>CSS</span></div>
+                          <div className="lang-marquee-item frontend-item"><FaFigma className="lang-icon figma" /><span>Figma</span></div>
+                          <div className="lang-marquee-item frontend-item"><FaWordpress className="lang-icon wp" /><span>WordPress</span></div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+
+                  {/* Backend Row - scrolls right to left */}
+                  <div className="lang-category">
+                    <div className="lang-category-label backend-label">
+                      <FaServer className="cat-icon" />
+                      <span>Backend</span>
+                    </div>
+                    <div className="lang-marquee-wrapper">
+                      <div className="lang-marquee-track">
+                        <div className="lang-marquee-content">
+                          <div className="lang-marquee-item backend-item"><FaPhp className="lang-icon php" /><span>PHP</span></div>
+                          <div className="lang-marquee-item backend-item"><FaNodeJs className="lang-icon node" /><span>Node.js</span></div>
+                          <div className="lang-marquee-item backend-item"><FaDatabase className="lang-icon mongo" /><span>MongoDB</span></div>
+                          <div className="lang-marquee-item backend-item"><FaDatabase className="lang-icon sql" /><span>SQL</span></div>
+                          <div className="lang-marquee-item backend-item"><FaPython className="lang-icon python" /><span>Python</span></div>
+                          <div className="lang-marquee-item backend-item"><FaPhp className="lang-icon laravel" /><span>Laravel</span></div>
+                        </div>
+                        <div className="lang-marquee-content backend-items" aria-hidden="true">
+                          <div className="lang-marquee-item backend-item"><FaPhp className="lang-icon php" /><span>PHP</span></div>
+                          <div className="lang-marquee-item backend-item"><FaNodeJs className="lang-icon node" /><span>Node.js</span></div>
+                          <div className="lang-marquee-item backend-item"><FaDatabase className="lang-icon mongo" /><span>MongoDB</span></div>
+                          <div className="lang-marquee-item backend-item"><FaDatabase className="lang-icon sql" /><span>SQL</span></div>
+                          <div className="lang-marquee-item backend-item"><FaPython className="lang-icon python" /><span>Python</span></div>
+                          <div className="lang-marquee-item backend-item"><FaPhp className="lang-icon laravel" /><span>Laravel</span></div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+
+                  {/* Tools Row - scrolls right to left */}
+                  <div className="lang-category">
+                    <div className="lang-category-label tools-label">
+                      <FaTools className="cat-icon" />
+                      <span>Tools</span>
+                    </div>
+                    <div className="lang-marquee-wrapper">
+                      <div className="lang-marquee-track">
+                        <div className="lang-marquee-content">
+                          <div className="lang-marquee-item tools-item"><FaAws className="lang-icon aws" /><span>AWS</span></div>
+                          <div className="lang-marquee-item tools-item"><FaServer className="lang-icon vercel" /><span>Vercel</span></div>
+                          <div className="lang-marquee-item tools-item"><FaChartLine className="lang-icon data" /><span>Data Analysis</span></div>
+                          <div className="lang-marquee-item tools-item"><FaGithub className="lang-icon github" /><span>GitHub</span></div>
+                          <div className="lang-marquee-item tools-item"><FaGitAlt className="lang-icon git" /><span>Git</span></div>
+                          <div className="lang-marquee-item tools-item"><FaServer className="lang-icon laragon" /><span>Laragon</span></div>
+                          <div className="lang-marquee-item tools-item"><FaServer className="lang-icon Power BI" /><span>Power BI</span></div>
+                        </div>
+                        <div className="lang-marquee-content tools-items" aria-hidden="true">
+                          <div className="lang-marquee-item tools-item"><FaAws className="lang-icon aws" /><span>AWS</span></div>
+                          <div className="lang-marquee-item tools-item"><FaServer className="lang-icon vercel" /><span>Vercel</span></div>
+                          <div className="lang-marquee-item tools-item"><FaChartLine className="lang-icon data" /><span>Data Analysis</span></div>
+                          <div className="lang-marquee-item tools-item"><FaGithub className="lang-icon github" /><span>GitHub</span></div>
+                          <div className="lang-marquee-item tools-item"><FaGitAlt className="lang-icon git" /><span>Git</span></div>
+                          <div className="lang-marquee-item tools-item"><FaServer className="lang-icon laragon" /><span>Laragon</span></div>
+                          <div className="lang-marquee-item tools-item"><FaServer className="lang-icon Power BI" /><span>Power BI</span></div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
                 </div>
               </div>
             </div>
@@ -98,60 +166,60 @@ function About() {
             <div className="achievement-item">
               <FaTrophy className="achievement-icon" />
               <span className="achievement-value">12+</span>
-              <span className="achievement-label">Projects Completed</span>
+              <span className="achievement-label">{t.about.achievements.projects}</span>
             </div>
             <div className="achievement-item">
               <FaBriefcase className="achievement-icon" />
               <span className="achievement-value">2+</span>
-              <span className="achievement-label">Years Experience</span>
+              <span className="achievement-label">{t.about.achievements.experience}</span>
             </div>
             <div className="achievement-item">
               <FaStar className="achievement-icon" />
               <span className="achievement-value">100%</span>
-              <span className="achievement-label">Client Satisfaction</span>
+              <span className="achievement-label">{t.about.achievements.satisfaction}</span>
             </div>
             <div className="achievement-item">
               <FaAward className="achievement-icon" />
               <span className="achievement-value">4+</span>
-              <span className="achievement-label">Certifications</span>
+              <span className="achievement-label">{t.about.achievements.certifications}</span>
             </div>
           </div>
 
           {/* Career Journey Timeline */}
           <div className="journey-section">
-            <h3 className="section-title">My Journey</h3>
+            <h3 className="section-title">{t.about.journey}</h3>
             <div className="journey-timeline">
               <div className="journey-item">
                 <div className="journey-marker"></div>
                 <div className="journey-content">
                   <div className="journey-header">
-                    <h4>Passerelles Numeriques Cambodia</h4>
-                    <span className="journey-date"><FaCalendarAlt /> 2026 - Present</span>
+                    <h4>{t.about.journey1Title}</h4>
+                    <span className="journey-date"><FaCalendarAlt /> {t.about.journey1Date}</span>
                   </div>
-                  <span className="journey-tag">Currently Enrolled</span>
-                  <p>Bachelor's Degree in Full-Stack Web Development program focusing on modern technologies, real-world projects, and professional soft skills.</p>
+                  <span className="journey-tag">{t.about.journey1Tag}</span>
+                  <p>{t.about.journey1Desc}</p>
                 </div>
               </div>
               <div className="journey-item">
                 <div className="journey-marker"></div>
                 <div className="journey-content">
                   <div className="journey-header">
-                    <h4>High School Graduation</h4>
-                    <span className="journey-date"><FaCalendarAlt /> 2021 - 2024</span>
+                    <h4>{t.about.journey2Title}</h4>
+                    <span className="journey-date"><FaCalendarAlt /> {t.about.journey2Date}</span>
                   </div>
-                  <span className="journey-tag past">2024 Graduate</span>
-                  <p>Graduated high school in 2024 with a focus on science, mathematics, and digital skills that support a modern development career.</p>
+                  <span className="journey-tag past">{t.about.journey2Tag}</span>
+                  <p>{t.about.journey2Desc}</p>
                 </div>
               </div>
               <div className="journey-item">
                 <div className="journey-marker"></div>
                 <div className="journey-content">
                   <div className="journey-header">
-                    <h4>Self-Taught Developer</h4>
-                    <span className="journey-date"><FaCalendarAlt /> 2025 - 2026</span>
+                    <h4>{t.about.journey3Title}</h4>
+                    <span className="journey-date"><FaCalendarAlt /> {t.about.journey3Date}</span>
                   </div>
-                  <span className="journey-tag past">Foundation</span>
-                  <p> HTML, CSS, JavaScript fundamentals and built portfolio projects independently through online resources and documentation.</p>
+                  <span className="journey-tag past">{t.about.journey3Tag}</span>
+                  <p>{t.about.journey3Desc}</p>
                 </div>
               </div>
             </div>
@@ -159,31 +227,140 @@ function About() {
 
           {/* Core Services Cards */}
           <div className="expertise-section">
-            <h3 className="section-title">What I Do</h3>
+            <h3 className="section-title">{t.about.expertise}</h3>
             <div className="expertise-grid">
               <div className="expertise-card frontend">
-                <div className="expertise-icon"><FaPalette /></div>
-                <h4>Frontend Development</h4>
-                <p>Modern React applications with responsive design and exceptional user experience</p>
-                <div className="expertise-level"><div className="level-bar" style={{width: '90%'}}></div><span>90%</span></div>
+                <div className="expertise-glow"></div>
+                <div className="expertise-card-bg"></div>
+                <div className="expertise-icon-wrap" style={{background: 'linear-gradient(135deg, #61dafb, #38bdf8)'}}>
+                  <FaPalette className="expertise-icon" />
+                </div>
+                <div className="expertise-card-content">
+                  <h4>{t.about.expertise1Title}</h4>
+                  <p>{t.about.expertise1Desc}</p>
+                </div>
+                <div className="expertise-footer">
+                  <div className="expertise-tag" style={{background: 'rgba(97, 218, 251, 0.15)', color: '#61dafb'}}>{lang === 'km' ? 'ជំនាញ' : 'Expert'}</div>
+                  <div className="expertise-stat">
+                    <div className="expertise-stat-bar">
+                      <div className="expertise-stat-fill" style={{width: '90%', background: 'linear-gradient(90deg, #61dafb, #38bdf8)'}}></div>
+                    </div>
+                    <span className="expertise-stat-value" style={{color: '#61dafb'}}>90%</span>
+                  </div>
+                </div>
+                <div className="expertise-border"></div>
               </div>
+
               <div className="expertise-card backend">
-                <div className="expertise-icon"><FaServer /></div>
-                <h4>Backend Development</h4>
-                <p>Scalable server-side applications with robust APIs and database architecture</p>
-                <div className="expertise-level"><div className="level-bar" style={{width: '85%'}}></div><span>85%</span></div>
+                <div className="expertise-glow"></div>
+                <div className="expertise-card-bg"></div>
+                <div className="expertise-icon-wrap" style={{background: 'linear-gradient(135deg, #68a063, #4caf50)'}}>
+                  <FaServer className="expertise-icon" />
+                </div>
+                <div className="expertise-card-content">
+                  <h4>{t.about.expertise2Title}</h4>
+                  <p>{t.about.expertise2Desc}</p>
+                </div>
+                <div className="expertise-footer">
+                  <div className="expertise-tag" style={{background: 'rgba(104, 160, 99, 0.15)', color: '#68a063'}}>{lang === 'km' ? 'ជំនាញ' : 'Expert'}</div>
+                  <div className="expertise-stat">
+                    <div className="expertise-stat-bar">
+                      <div className="expertise-stat-fill" style={{width: '85%', background: 'linear-gradient(90deg, #68a063, #4caf50)'}}></div>
+                    </div>
+                    <span className="expertise-stat-value" style={{color: '#68a063'}}>85%</span>
+                  </div>
+                </div>
+                <div className="expertise-border"></div>
               </div>
+
               <div className="expertise-card mobile">
-                <div className="expertise-icon"><FaMobileAlt /></div>
-                <h4>Mobile Responsive</h4>
-                <p>Pixel-perfect mobile-first designs that work seamlessly across all devices</p>
-                <div className="expertise-level"><div className="level-bar" style={{width: '95%'}}></div><span>95%</span></div>
+                <div className="expertise-glow"></div>
+                <div className="expertise-card-bg"></div>
+                <div className="expertise-icon-wrap" style={{background: 'linear-gradient(135deg, #4ecdc4, #2dd4bf)'}}>
+                  <FaMobileAlt className="expertise-icon" />
+                </div>
+                <div className="expertise-card-content">
+                  <h4>{t.about.expertise3Title}</h4>
+                  <p>{t.about.expertise3Desc}</p>
+                </div>
+                <div className="expertise-footer">
+                  <div className="expertise-tag" style={{background: 'rgba(78, 205, 196, 0.15)', color: '#4ecdc4'}}>{lang === 'km' ? 'ជំនាញ' : 'Advanced'}</div>
+                  <div className="expertise-stat">
+                    <div className="expertise-stat-bar">
+                      <div className="expertise-stat-fill" style={{width: '95%', background: 'linear-gradient(90deg, #4ecdc4, #2dd4bf)'}}></div>
+                    </div>
+                    <span className="expertise-stat-value" style={{color: '#4ecdc4'}}>95%</span>
+                  </div>
+                </div>
+                <div className="expertise-border"></div>
               </div>
+
               <div className="expertise-card tools">
-                <div className="expertise-icon"><FaTools /></div>
-                <h4>DevOps & Tools</h4>
-                <p>CI/CD pipelines, version control, cloud deployment and development workflows</p>
-                <div className="expertise-level"><div className="level-bar" style={{width: '80%'}}></div><span>80%</span></div>
+                <div className="expertise-glow"></div>
+                <div className="expertise-card-bg"></div>
+                <div className="expertise-icon-wrap" style={{background: 'linear-gradient(135deg, #f59e0b, #eab308)'}}>
+                  <FaTools className="expertise-icon" />
+                </div>
+                <div className="expertise-card-content">
+                  <h4>{t.about.expertise4Title}</h4>
+                  <p>{t.about.expertise4Desc}</p>
+                </div>
+                <div className="expertise-footer">
+                  <div className="expertise-tag" style={{background: 'rgba(245, 158, 11, 0.15)', color: '#f59e0b'}}>{lang === 'km' ? 'ជំនាញ' : 'Proficient'}</div>
+                  <div className="expertise-stat">
+                    <div className="expertise-stat-bar">
+                      <div className="expertise-stat-fill" style={{width: '80%', background: 'linear-gradient(90deg, #f59e0b, #eab308)'}}></div>
+                    </div>
+                    <span className="expertise-stat-value" style={{color: '#f59e0b'}}>80%</span>
+                  </div>
+                </div>
+                <div className="expertise-border"></div>
+              </div>
+
+              {/* UX/UI Design */}
+              <div className="expertise-card uxui">
+                <div className="expertise-glow"></div>
+                <div className="expertise-card-bg"></div>
+                <div className="expertise-icon-wrap" style={{background: 'linear-gradient(135deg, #a855f7, #8b5cf6)'}}>
+                  <FaFigma className="expertise-icon" />
+                </div>
+                <div className="expertise-card-content">
+                  <h4>{t.about.expertise5Title}</h4>
+                  <p>{t.about.expertise5Desc}</p>
+                </div>
+                <div className="expertise-footer">
+                  <div className="expertise-tag" style={{background: 'rgba(168, 85, 247, 0.15)', color: '#a855f7'}}>{lang === 'km' ? 'ជំនាញ' : 'Proficient'}</div>
+                  <div className="expertise-stat">
+                    <div className="expertise-stat-bar">
+                      <div className="expertise-stat-fill" style={{width: '70%', background: 'linear-gradient(90deg, #a855f7, #8b5cf6)'}}></div>
+                    </div>
+                    <span className="expertise-stat-value" style={{color: '#a855f7'}}>70%</span>
+                  </div>
+                </div>
+                <div className="expertise-border"></div>
+              </div>
+
+              {/* IT Support */}
+              <div className="expertise-card itsupport">
+                <div className="expertise-glow"></div>
+                <div className="expertise-card-bg"></div>
+                <div className="expertise-icon-wrap" style={{background: 'linear-gradient(135deg, #f43f5e, #e11d48)'}}>
+                  <FaHeadset className="expertise-icon" />
+                </div>
+                <div className="expertise-card-content">
+                  <h4>{t.about.expertise6Title}</h4>
+                  <p>{t.about.expertise6Desc}</p>
+                </div>
+                <div className="expertise-footer">
+                  <div className="expertise-tag" style={{background: 'rgba(244, 63, 94, 0.15)', color: '#f43f5e'}}>{lang === 'km' ? 'ជំនាញ' : 'Proficient'}</div>
+                  <div className="expertise-stat">
+                    <div className="expertise-stat-bar">
+                      <div className="expertise-stat-fill" style={{width: '60%', background: 'linear-gradient(90deg, #f43f5e, #e11d48)'}}></div>
+                    </div>
+                    <span className="expertise-stat-value" style={{color: '#f43f5e'}}>60%</span>
+                  </div>
+                </div>
+                <div className="expertise-border"></div>
               </div>
             </div>
           </div>
