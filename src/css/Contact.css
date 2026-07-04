@@ -56,10 +56,16 @@
 
 .title-accent {
   display: block;
-  background: linear-gradient(135deg, #6366f1, #8b5cf6);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  background-clip: text;
+  color: #8b5cf6;
+}
+
+@supports (background-clip: text) or (-webkit-background-clip: text) {
+  .title-accent {
+    background: linear-gradient(135deg, #6366f1, #8b5cf6);
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+  }
 }
 
 .title-underline {

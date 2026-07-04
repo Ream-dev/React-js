@@ -18,9 +18,9 @@ const translations = {
       nameLast: "Khorn",
       roles: [
         "Modern Full Stack Developer",
-        "React & Node.js Specialist",
-        "UI/UX-Focused Engineer",
-        "Database Creator",
+        "React.js & Node.js & Vue.js & laravel",
+        "UI/UX-Focused modern",
+        "Database Adminstrator",
       ],
       description:
         "Before: simple websites. Now: modern digital products with polished UI, fast performance, and scalable architecture. I build web experiences that feel fresh, functional, and ready for today — designed to impress hiring teams and support product growth. Right now I am looking for a job and internship to gain my experiences in the future.",
@@ -53,7 +53,7 @@ const translations = {
       edu2Period: "2021 - 2024",
       edu2Status: "Graduated 2024",
       edu2Desc:
-        "Completed high school with strong results in science, mathematics, and digital literacy, building a foundation for modern web development and technology studies.",
+        "Completed 12 years of general education. Currently pursuing Full-Stack Web Development, with a focus on modern technologies, real-world projects, and professional soft skills.",
       languages: "Languages & Technologies",
       languagesSub: "What I've Learned",
       achievements: {
@@ -67,7 +67,7 @@ const translations = {
       journey1Date: "2026 - Present",
       journey1Tag: "Currently Enrolled",
       journey1Desc:
-        "Bachelor's Degree in Full-Stack Web Development program focusing on modern technologies, real-world projects, and professional soft skills.",
+        "Associate's Degree in Full-Stack Web Development program focusing on modern technologies, real-world projects, and professional soft skills.",
       journey2Title: "High School Graduation",
       journey2Date: "2021 - 2024",
       journey2Tag: "2024 Graduate",
@@ -77,11 +77,11 @@ const translations = {
       journey3Date: "2025 - 2026",
       journey3Tag: "Foundation",
       journey3Desc:
-        "HTML, CSS, JavaScript fundamentals and built portfolio projects independently through online resources and documentation.",
+        "HTML, CSS, JavaScript,python fundamentals and built portfolio projects independently through online resources and documentation.",
       expertise: "What I Do",
       expertise1Title: "Frontend Development",
       expertise1Desc:
-        "Modern React applications with responsive design and exceptional user experience",
+        "Modern Reac & Vue applications with responsive design and exceptional user experience",
       expertise2Title: "Backend Development",
       expertise2Desc:
         "Scalable server-side applications with robust APIs and database architecture",
@@ -90,7 +90,7 @@ const translations = {
         "Pixel-perfect mobile-first designs that work seamlessly across all devices",
       expertise4Title: "DevOps & Tools",
       expertise4Desc:
-        "CI/CD pipelines, version control, cloud deployment and development workflows",
+        "CI/CD pipelines, version control, MobaXterm deployment and development workflows",
       expertise5Title: "UX/UI Design",
       expertise5Desc:
         "Crafting intuitive interfaces and engaging user experiences with modern design principles",
@@ -106,7 +106,6 @@ const translations = {
     experiences: {
       badge: "🎯 Additional Experiences",
       titleMain: "My Journey",
-      titleAccent: "& Achievements",
       subtitle:
         "Exploring new skills, participating in workshops, and contributing to the tech community",
       seeMore: "See more",
@@ -158,7 +157,7 @@ const translations = {
           highlights: ["Shadowed senior engineers", "Attended architecture reviews", "Learned production workflows"],
         },
         {
-          title: "Canva Core",
+          title: "Canva Core and Cybersecurity",
           description:
             "I learned to make simple graphics and content for social media.",
           more: "I used Canva to build nice pictures, banners, and visual content that looks modern and clean.",
@@ -218,16 +217,15 @@ const translations = {
     contacts: {
       badge: "📬 Get In Touch",
       titleMain: "Let's",
-      titleAccent: "Collaborate",
       subtitle:
         "Have a project in mind? I'm always open to discussing new opportunities and ideas.",
       infoTitle: "Contact Info",
       formTitle: "Send a Message",
       formSubtitle: "I'll get back to you as soon as possible",
-      nameLabel: "Your Name",
-      namePlaceholder: "John Doe",
-      emailLabel: "Your Email",
-      emailPlaceholder: "john@example.com",
+      nameLabel: "YName",
+      namePlaceholder: "ream",
+      emailLabel: "Email",
+      emailPlaceholder: "ream@example.com",
       messageLabel: "Message",
       messagePlaceholder: "Tell me about your project...",
       sendBtn: "Send Message",
@@ -297,7 +295,7 @@ const translations = {
       nameLast: "ខន",
       roles: [
         "អ្នកអភិវឌ្ឍន៍ Full Stack ទំនើប",
-        "អ្នកជំនាញ React & Node.js",
+        "អ្នកជំនាញ React Vue & Node.js Laravel",
         "វិស្វករផ្នែក UI/UX",
         "អ្នកបង្កើតមូលដ្ឋានទិន្នន័យ",
       ],
@@ -346,7 +344,7 @@ const translations = {
       journey1Date: "២០២៦ - បច្ចុប្បន្ន",
       journey1Tag: "កំពុងសិក្សា",
       journey1Desc:
-        "បរិញ្ញាប័ត្រផ្នែកអភិវឌ្ឍន៍គេហទំព័រ Full-Stack ដោយផ្តោតលើបច្ចេកវិទ្យាទំនើប គម្រោងជាក់ស្តែង និងជំនាញទន់វិជ្ជាជីវៈ។",
+        "បរិញ្ញាប័ត្រផ្នែកសិស្សរយះពេល១២ឆ្នាំ។​​ សព្វថ្ងៃអភិវឌ្ឍន៍គេហទំព័រ Full-Stack ដោយផ្តោតលើបច្ចេកវិទ្យាទំនើប គម្រោងជាក់ស្តែង និងជំនាញទន់វិជ្ជាជីវៈ។",
       journey2Title: "បញ្ចប់ការសិក្សាវិទ្យាល័យ",
       journey2Date: "២០២១ - ២០២៤",
       journey2Tag: "បញ្ចប់ ២០២៤",
