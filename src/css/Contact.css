@@ -77,6 +77,8 @@
   margin: 0 auto;
   line-height: 1.75;
   font-weight: 400;
+  overflow-wrap: break-word;
+  word-break: break-word;
 }
 
 /* Main Grid */
@@ -737,11 +739,16 @@
     padding: 7px 12px;
     font-size: 0.78rem;
   }
+  
+  .header-badge {
+    font-size: 0.7rem;
+    padding: 6px 14px;
+  }
 }
 
 @media (max-width: 480px) {
   .section-title {
-    font-size: 40px;
+    font-size: 36px;
   }
   
   .title-main {
@@ -763,7 +770,7 @@
   
   .contact-form input,
   .contact-form textarea {
-    padding: 14px 16px;
+    padding: 14px 16px 14px 40px;
     font-size: 16px; /* Prevents zoom on iOS */
   }
   
@@ -789,6 +796,119 @@
   
   .info-more {
     font-size: 0.85rem;
+  }
+  
+  .header-badge {
+    font-size: 0.65rem;
+    padding: 5px 12px;
+  }
+}
+
+@media (max-width: 380px) {
+  .section-title {
+    font-size: 28px;
+  }
+  
+  .title-main {
+    font-size: 28px;
+  }
+  
+  .title-accent {
+    font-size: 22px;
+  }
+  
+  .section-subtitle {
+    font-size: 14px;
+  }
+  
+  .contact-form {
+    padding: 18px 14px;
+    border-radius: 18px;
+  }
+  
+  .contact-form input,
+  .contact-form textarea {
+    padding: 12px 14px 12px 36px;
+    font-size: 15px;
+    border-radius: 14px;
+  }
+  
+  .input-field-icon {
+    left: 12px;
+    font-size: 0.8rem;
+  }
+  
+  .input-textarea-icon {
+    top: 16px;
+  }
+  
+  .form-header-icon {
+    width: 44px;
+    height: 44px;
+    font-size: 1.1rem;
+  }
+  
+  .form-title {
+    font-size: 0.95rem;
+  }
+  
+  .form-submit {
+    padding: 12px 20px;
+    font-size: 14px;
+    border-radius: 14px;
+  }
+  
+  .info-card {
+    padding: 12px 12px;
+    border-radius: 16px;
+  }
+  
+  .info-icon {
+    width: 36px;
+    height: 36px;
+    font-size: 1rem;
+    border-radius: 12px;
+  }
+  
+  .info-value {
+    font-size: 0.8rem;
+  }
+  
+  .info-more {
+    font-size: 0.78rem;
+  }
+  
+  .info-toggle {
+    padding: 5px 10px;
+    font-size: 0.7rem;
+  }
+  
+  .info-label {
+    font-size: 0.65rem;
+  }
+  
+  .header-badge {
+    font-size: 0.58rem;
+    padding: 4px 10px;
+  }
+  
+  .direct-email-btn {
+    padding: 12px 14px;
+    gap: 10px;
+  }
+  
+  .direct-email-icon {
+    width: 36px;
+    height: 36px;
+    font-size: 1rem;
+  }
+  
+  .direct-email-label {
+    font-size: 0.65rem;
+  }
+  
+  .direct-email-value {
+    font-size: 0.78rem;
   }
 }
 

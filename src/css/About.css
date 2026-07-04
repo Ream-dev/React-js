@@ -1033,7 +1033,7 @@
   margin-top: 60px;
 }
 
-.section-title {
+.about-section .section-title {
   font-size: clamp(1.8rem, 4vw, 2.5rem);
   font-weight: 800;
   text-align: center;
@@ -1645,8 +1645,7 @@ body.light-mode .title-last,
 body.light-mode .hero-subtitle strong,
 body.light-mode .stat-number,
 body.light-mode .card-title h3,
-body.light-mode .section-title,
-body.light-mode .section-title {
+body.light-mode .about-section .section-title {
   color: transparent;
 }
 

@@ -77,6 +77,8 @@
   margin: 0 auto;
   line-height: 1.75;
   font-weight: 400;
+  overflow-wrap: break-word;
+  word-break: break-word;
 }
 
 /* Experiences Grid */
@@ -560,6 +562,11 @@
   .exp-content {
     padding: 16px 18px 20px;
   }
+  
+  .header-badge {
+    font-size: 0.7rem;
+    padding: 6px 14px;
+  }
 }
 
 @media (max-width: 480px) {
@@ -598,6 +605,61 @@
 
   .exp-image-container {
     height: 140px;
+  }
+  
+  .header-badge {
+    font-size: 0.65rem;
+    padding: 5px 12px;
+  }
+}
+
+@media (max-width: 380px) {
+  .section-title {
+    font-size: 30px;
+  }
+
+  .title-main {
+    font-size: 28px;
+  }
+
+  .title-accent {
+    font-size: 22px;
+  }
+
+  .section-subtitle {
+    font-size: 14px;
+  }
+
+  .exp-content {
+    padding: 14px 14px 18px;
+  }
+
+  .exp-title {
+    font-size: 17px;
+  }
+
+  .exp-description {
+    font-size: 13px;
+  }
+
+  .exp-image-container {
+    height: 120px;
+  }
+  
+  .exp-toggle-btn {
+    padding: 8px 14px;
+    font-size: 0.72rem;
+  }
+  
+  .exp-category-badge,
+  .exp-year-badge {
+    font-size: 0.58rem;
+    padding: 3px 8px;
+  }
+  
+  .header-badge {
+    font-size: 0.58rem;
+    padding: 4px 10px;
   }
 }
 
