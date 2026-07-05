@@ -1,6 +1,8 @@
 import "../css/About.css";
-import { FaReact, FaCode, FaLaptopCode, FaGraduationCap, FaNodeJs, FaDatabase, FaGitAlt, FaCloud, FaMobileAlt, FaPalette, FaChartLine, FaAward, FaRocket, FaGithub, FaLanguage, FaCertificate, FaHtml5, FaCss3Alt, FaJsSquare, FaPython, FaDocker, FaAws, FaFigma, FaServer, FaTools, FaStar, FaTrophy, FaBriefcase, FaCalendarAlt, FaWordpress, FaPhp, FaVuejs, FaHeadset } from "react-icons/fa";
+import { FaReact, FaCode, FaLaptopCode, FaGraduationCap, FaNodeJs, FaDatabase, FaGitAlt, FaCloud, FaMobileAlt, FaPalette, FaChartLine, FaAward, FaRocket, FaGithub, FaLanguage, FaCertificate, FaHtml5, FaCss3Alt, FaJsSquare, FaPython, FaDocker, FaAws, FaFigma, FaServer, FaTools, FaStar, FaTrophy, FaBriefcase, FaCalendarAlt, FaWordpress, FaPhp, FaVuejs, FaHeadset, FaDownload, FaMapMarkerAlt } from "react-icons/fa";
 import { useLanguage } from "../contexts/LanguageContext";
+import profile from "../assets/ream.png";
+import cvFile from "../assets/Deep Purple Professional College Student CV Resume.pdf";
 
 function About() {
   const { t, lang } = useLanguage();
@@ -24,6 +26,73 @@ function About() {
           {lang === "km" && (
             <p className="khmer-intro">{t.about.khmerIntro}</p>
           )}
+        </div>
+
+        {/* Hero Profile Section */}
+        <div className="hero-section">
+          <div className="hero-content">
+            {/* IMAGE ON LEFT */}
+            <div className="hero-right">
+              <div className="profile-hero">
+                <div className="profile-frame">
+                  <div className="profile-glow"></div>
+                  <div className="profile-image-container">
+                    <img src={profile} alt="Ream Khorn" className="profile-image" />
+                    <div className="sparkle"></div>
+                    <div className="sparkle"></div>
+                    <div className="sparkle"></div>
+                    <div className="sparkle"></div>
+                    <div className="sparkle"></div>
+                  </div>
+                  <div className="profile-info-card">
+                    <h3>{t.hero.nameFirst} {t.hero.nameLast}</h3>
+                    <p>{t.hero.profileRole}</p>
+                    <div className="location-info">
+                      <FaMapMarkerAlt /> {t.hero.profileLocation}
+                    </div>
+                    <div className="status-badge available">
+                      <span className="status-dot"></span>
+                      {t.hero.available}
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            {/* TEXT ON RIGHT */}
+            <div className="hero-left">
+              <div className="hero-intro">
+                <div className="intro-badge">
+                  <span className="badge-text">{lang === 'km' ? 'សូមស្វាគមន៍' : 'WELCOME TO MY WORLD'}</span>
+                </div>
+                <h1 className="hero-title">
+                  <span className="title-first">{t.hero.nameFirst}</span>
+                  <span className="title-last">{t.hero.nameLast}</span>
+                </h1>
+                <p className="hero-subtitle">
+                  {t.about.subheading}
+                </p>
+              </div>
+
+              <div className="quick-stats">
+                {t.hero.stats.map((stat, i) => (
+                  <div className="stat-item" key={i}>
+                    <span className="stat-number">{stat.number}</span>
+                    <span className="stat-label">{stat.label}</span>
+                  </div>
+                ))}
+              </div>
+
+              <div className="hero-actions">
+                <a href={cvFile} className="btn-primary" download="Ream_Khorn_CV.pdf">
+                  <FaDownload /> {lang === 'km' ? 'ទាញយក CV' : 'Download CV'}
+                </a>
+                <a href="#projects" className="btn-secondary">
+                  <FaRocket /> {t.hero.viewWork}
+                </a>
+              </div>
+            </div>
+          </div>
         </div>
 
         <div className="details-section">

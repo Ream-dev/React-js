@@ -130,13 +130,13 @@
   width: 100%;
 }
 
-/* Hero Left Side */
+/* Hero Left Side - Text content (now on RIGHT in layout) */
 .hero-left {
-  animation: slideInLeft 1s ease-out;
+  animation: slideInRight 1s ease-out;
 }
 
-@keyframes slideInLeft {
-  from { opacity: 0; transform: translateX(-50px); }
+@keyframes slideInRight {
+  from { opacity: 0; transform: translateX(50px); }
   to { opacity: 1; transform: translateX(0); }
 }
 
@@ -306,13 +306,13 @@
   transform: translateY(-2px);
 }
 
-/* Hero Right Side - Profile */
+/* Hero Right Side - Profile (now on LEFT in layout via DOM order) */
 .hero-right {
-  animation: slideInRight 1s ease-out;
+  animation: slideInLeft 1s ease-out;
 }
 
-@keyframes slideInRight {
-  from { opacity: 0; transform: translateX(50px); }
+@keyframes slideInLeft {
+  from { opacity: 0; transform: translateX(-50px); }
   to { opacity: 1; transform: translateX(0); }
 }
 
@@ -321,6 +321,7 @@
   justify-content: center;
 }
 
+/* Modern Square Profile Frame */
 .profile-frame {
   background: rgba(255, 255, 255, 0.05);
   border-radius: 30px;
@@ -330,53 +331,149 @@
   text-align: center;
   position: relative;
   overflow: hidden;
-  transition: all 0.4s ease;
+  transition: box-shadow 0.4s cubic-bezier(0.4, 0, 0.2, 1), border-color 0.4s ease;
+  animation: profileFloat 6s ease-in-out infinite;
+}
+
+@keyframes profileFloat {
+  0%, 100% { transform: translateY(0px) scale(1); }
+  50% { transform: translateY(-12px) scale(1); }
 }
 
 .profile-frame:hover {
-  transform: translateY(-10px);
-  box-shadow: 0 30px 60px rgba(56, 189, 248, 0.2);
-  border-color: rgba(56, 189, 248, 0.4);
+  animation: profileFloatHover 6s ease-in-out infinite;
+  box-shadow: 0 40px 80px rgba(56, 189, 248, 0.25);
+  border-color: rgba(56, 189, 248, 0.5);
 }
 
+@keyframes profileFloatHover {
+  0%, 100% { transform: translateY(0px) scale(1.02); }
+  50% { transform: translateY(-12px) scale(1.02); }
+}
+
+/* Square Profile Image with Animated Gradient Border */
 .profile-image-container {
   position: relative;
-  width: 280px;
-  height: 280px;
+  width: 260px;
+  height: 260px;
   margin: 0 auto 30px;
-  border-radius: 20px;
-  overflow: hidden;
+  border-radius: 24px;
+  overflow: visible;
 }
 
+/* Gradient border glow ring */
+.profile-image-container::before {
+  content: '';
+  position: absolute;
+  inset: -4px;
+  border-radius: 28px;
+  background: linear-gradient(135deg, #38bdf8, #7c3aed, #06b6d4, #38bdf8, #a855f7, #38bdf8);
+  background-size: 400% 400%;
+  z-index: 1;
+  animation: gradientBorder 5s ease infinite;
+  box-shadow: 0 0 30px rgba(56, 189, 248, 0.3);
+}
+
+@keyframes gradientBorder {
+  0% { background-position: 0% 50%; }
+  25% { background-position: 100% 0%; }
+  50% { background-position: 100% 100%; }
+  75% { background-position: 0% 100%; }
+  100% { background-position: 0% 50%; }
+}
+
+/* Second outer animated dash ring - simpler cross-browser approach */
+.profile-image-container::after {
+  content: '';
+  position: absolute;
+  inset: -8px;
+  border-radius: 30px;
+  border: 1.5px dashed rgba(56, 189, 248, 0.35);
+  animation: spinRing 10s linear infinite;
+  z-index: 1;
+}
+
+@keyframes spinRing {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
+
+/* The image itself - square with clean edges */
 .profile-image {
-  width: 100%;
-  height: 100%;
+  position: relative;
+  z-index: 2;
+  display: block;
+  width: calc(100% - 8px);
+  height: calc(100% - 8px);
+  margin: 4px;
+  border-radius: 20px;
   object-fit: cover;
-  transition: transform 0.6s ease;
+  transition: transform 0.6s cubic-bezier(0.4, 0, 0.2, 1), filter 0.4s ease;
+  filter: contrast(1.05) brightness(1.02);
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15);
 }
 
+/* Hover scale effect */
 .profile-frame:hover .profile-image {
-  transform: scale(1.05);
+  transform: scale(1.08);
+  filter: contrast(1.1) brightness(1.04);
 }
 
+/* Pulsing glow behind image */
 .profile-glow {
   position: absolute;
-  top: -50%;
-  left: -50%;
-  width: 200%;
-  height: 200%;
-  background: radial-gradient(circle, rgba(56, 189, 248, 0.3) 0%, transparent 70%);
-  opacity: 0;
-  transition: opacity 0.4s ease;
+  top: 50%;
+  left: 50%;
+  width: 300px;
+  height: 300px;
+  transform: translate(-50%, -50%);
+  background: radial-gradient(circle, rgba(56, 189, 248, 0.25) 0%, rgba(124, 58, 237, 0.15) 40%, transparent 70%);
+  opacity: 0.7;
+  transition: opacity 0.5s ease, transform 0.5s ease;
   pointer-events: none;
+  border-radius: 50%;
+  z-index: 0;
+  animation: glowPulse 3s ease-in-out infinite;
+}
+
+@keyframes glowPulse {
+  0%, 100% { opacity: 0.5; transform: translate(-50%, -50%) scale(1); }
+  50% { opacity: 0.9; transform: translate(-50%, -50%) scale(1.15); }
 }
 
 .profile-frame:hover .profile-glow {
   opacity: 1;
+  transform: translate(-50%, -50%) scale(1.3);
 }
+
+/* Sparkle particles around image */
+@keyframes sparkle {
+  0%, 100% { opacity: 0; transform: scale(0); }
+  50% { opacity: 1; transform: scale(1); }
+}
+
+.profile-image-container .sparkle {
+  position: absolute;
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: #38bdf8;
+  box-shadow: 0 0 10px rgba(56, 189, 248, 0.8), 0 0 20px rgba(56, 189, 248, 0.4);
+  z-index: 3;
+  animation: sparkle 3s ease-in-out infinite;
+  pointer-events: none;
+}
+
+.profile-image-container .sparkle:nth-child(3) { top: -8px; left: 20%; animation-delay: 0s; }
+.profile-image-container .sparkle:nth-child(4) { top: 30%; right: -12px; animation-delay: 0.6s; }
+.profile-image-container .sparkle:nth-child(5) { bottom: -8px; left: 60%; animation-delay: 1.2s; }
+.profile-image-container .sparkle:nth-child(6) { top: 60%; left: -12px; animation-delay: 1.8s; }
+.profile-image-container .sparkle:nth-child(7) { top: -5px; right: 30%; animation-delay: 2.4s; }
 
 .profile-info-card {
   text-align: center;
+  position: relative;
+  z-index: 2;
 }
 
 .profile-info-card h3 {
@@ -747,55 +844,7 @@
 .lang-icon.git { color: #f1502f; }
 .lang-icon.laragon { color: #38bdf8; }
 
-/* Profile Circular Style */
-.profile-image-container {
-  position: relative;
-  width: 220px;
-  height: 220px;
-  margin: 0 auto 25px;
-}
 
-.profile-image-container::before {
-  content: "";
-  position: absolute;
-  inset: -6px;
-  border-radius: 50%;
-  border: 2px solid transparent;
-  border-top-color: rgba(56, 189, 248, 0.5);
-  border-right-color: rgba(6, 182, 212, 0.3);
-  animation: spinRing 5s linear infinite;
-}
-
-.profile-image-container::after {
-  content: "";
-  position: absolute;
-  inset: -12px;
-  border-radius: 50%;
-  border: 1px solid transparent;
-  border-bottom-color: rgba(56, 189, 248, 0.2);
-  border-left-color: rgba(6, 182, 212, 0.15);
-  animation: spinRing 8s linear infinite reverse;
-}
-
-@keyframes spinRing {
-  from { transform: rotate(0deg); }
-  to { transform: rotate(360deg); }
-}
-
-.profile-image {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  border-radius: 50%;
-  border: 3px solid rgba(56, 189, 248, 0.3);
-  transition: transform 0.6s ease;
-  position: relative;
-  z-index: 2;
-}
-
-.profile-image-container:hover .profile-image {
-  transform: scale(1.05);
-}
 
 /* Achievements Section */
 .achievements-section {
@@ -1404,8 +1453,8 @@
   }
   
   .profile-image-container {
-    width: 240px;
-    height: 240px;
+    width: 220px;
+    height: 220px;
   }
   
   .detail-card {
@@ -1518,6 +1567,11 @@
   .profile-image-container {
     width: 180px;
     height: 180px;
+  }
+
+  /* Hide sparkles on mobile */
+  .profile-image-container .sparkle {
+    display: none;
   }
 
   .detail-card {
@@ -1681,6 +1735,28 @@ body.light-mode .expertise-card:hover {
   background: #ffffff;
   border-color: rgba(11, 139, 255, 0.2);
   box-shadow: 0 20px 50px rgba(11, 139, 255, 0.15);
+}
+
+/* Light mode: profile glow & animations */
+body.light-mode .profile-glow {
+  background: radial-gradient(circle, rgba(11, 139, 255, 0.2) 0%, rgba(124, 58, 237, 0.1) 40%, transparent 70%);
+}
+
+
+
+body.light-mode .profile-image-container::before {
+  background: linear-gradient(135deg, #0b8bff, #7c3aed, #3cc6ff, #0b8bff, #a855f7, #0b8bff);
+  background-size: 400% 400%;
+  box-shadow: 0 0 30px rgba(11, 139, 255, 0.2);
+}
+
+body.light-mode .profile-image-container::after {
+  border-color: rgba(11, 139, 255, 0.25);
+}
+
+body.light-mode .profile-image-container .sparkle {
+  background: #0b8bff;
+  box-shadow: 0 0 10px rgba(11, 139, 255, 0.6), 0 0 20px rgba(11, 139, 255, 0.3);
 }
 
 body.light-mode .expertise-card.frontend:hover {
