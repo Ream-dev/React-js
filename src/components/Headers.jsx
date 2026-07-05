@@ -1,12 +1,13 @@
 import { useEffect, useState } from "react";
-import { FaGithub, FaLinkedin, FaEnvelope, FaChevronDown, FaReact, FaNodeJs, FaHtml5, FaCss3Alt, FaJsSquare, FaPython } from "react-icons/fa";
+import { FaGithub, FaLinkedin, FaEnvelope, FaChevronDown, FaReact, FaNodeJs, FaHtml5, FaCss3Alt, FaJsSquare, FaPython, FaDownload } from "react-icons/fa";
 import profile from "../assets/ream.png";
+import cvFile from "../assets/Deep Purple Professional College Student CV Resume.pdf";
 import { SiTypescript } from "react-icons/si";
 import "../css/Headers.css";
 import { useLanguage } from "../contexts/LanguageContext";
 
 function Headers() {
-  const { t } = useLanguage();
+  const { t, lang } = useLanguage();
   const roles = t.hero.roles;
 
   const [text, setText] = useState("");
@@ -70,8 +71,8 @@ function Headers() {
             <a href="#projects" className="btn primary">
               {t.hero.viewWork}
             </a>
-            <a href="#contact" className="btn outline">
-              {t.hero.contactMe}
+            <a href={cvFile} className="btn primary" download="Ream_Khorn_CV.pdf">
+              <FaDownload /> {lang === 'km' ? 'ទាញយក CV' : 'Download CV'}
             </a>
           </div>
 
